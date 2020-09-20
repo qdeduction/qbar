@@ -1,0 +1,25 @@
+[package]
+name          = "qbar"
+version       = "0.0.0"
+
+description   = "the rational proof assistant"
+readme        = "README.md"
+license-file  = "LICENSE"
+
+authors       = ["Brandon H. Gomes <bhgomes.github@gmail.com>"]
+
+repository    = "https://github.com/qdeduction/qbar"
+homepage      = "https://github.com/qdeduction/qbar"
+documentation = "https://docs.rs/qbar"
+
+edition       = "2018"
+
+[badges]
+appveyor      = { repository = "qdeduction/qbar", branch = "master", service = "github" }
+coveralls     = { repository = "qdeduction/qbar", branch = "master", service = "github" }
+travis-ci     = { repository = "qdeduction/qbar", branch = "master"                     }
+maintenance   = { status     = "actively-developed"                                     }
+
+[dependencies]
+terminal      = { version = "0.2.1", features = ["crossterm-backend"] }
+
