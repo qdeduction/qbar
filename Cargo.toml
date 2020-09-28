@@ -4,7 +4,7 @@ version       = "0.0.0"
 
 description   = "the rational proof assistant"
 readme        = "README.md"
-license-file  = "LICENSE"
+license       = "MIT"
 
 authors       = ["Brandon H. Gomes <bhgomes.github@gmail.com>"]
 
