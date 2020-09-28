@@ -19,6 +19,4 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
     - name: Run Clippy
-      run: cargo clippy --verbose
-    - name: Format
-      run: cargo fmt --verbose -- --check
+      run: cargo clippy
