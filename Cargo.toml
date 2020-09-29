@@ -1,25 +1,23 @@
 [package]
-name          = "qbar"
-version       = "0.0.0"
-
-description   = "the rational proof assistant"
-readme        = "README.md"
-license       = "MIT"
-
-authors       = ["Brandon H. Gomes <bhgomes.github@gmail.com>"]
-
-repository    = "https://github.com/qdeduction/qbar"
-homepage      = "https://github.com/qdeduction/qbar"
+name = "qbar"
+version = "0.0.0"
+edition = "2018"
+authors = ["Brandon H. Gomes <bhgomes.github@gmail.com>"]
+homepage = "https://qbar.io"
 documentation = "https://docs.rs/qbar"
-
-edition       = "2018"
+repository = "https://github.com/qdeduction/qbar"
+readme = "README.md"
+license = "ISC"
+keywords = ["cli", "proof assistant"]
+categories = ["command-line-utilities"]
+description = "the rational proof assistant"
+exclude = ["docs/**/*"]
 
 [badges]
-appveyor      = { repository = "qdeduction/qbar", branch = "master", service = "github" }
-coveralls     = { repository = "qdeduction/qbar", branch = "master", service = "github" }
-travis-ci     = { repository = "qdeduction/qbar", branch = "master"                     }
-maintenance   = { status     = "actively-developed"                                     }
+is-it-maintained-issue-resolution = { repository = "qdeduction/qbar" }
+is-it-maintained-open-issues = { repository = "qdeduction/qbar" }
+maintenance = { status = "actively-developed" }
 
 [dependencies]
-terminal      = { version = "0.2.1", features = ["crossterm-backend"] }
+terminal = { version = "0.2.1", features = ["crossterm-backend"] }
 

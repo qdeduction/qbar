@@ -6,9 +6,8 @@
 
 # qbar
 
+[![Workflow Status](https://img.shields.io/github/workflow/status/qdeduction/qbar/rust?label=workflow&style=flat-square)](https://github.com/qdeduction/qbar/actions)
 [![Latest Version](https://img.shields.io/crates/v/qbar.svg?style=flat-square)](https://crates.io/crates/qbar)
-[![Travis Build Status](https://img.shields.io/travis/qdeduction/qbar.svg?style=flat-square)](https://travis-ci.com/qdeduction/qbar)
-[![Workflow Status](https://img.shields.io/github/workflow/status/qdeduction/qbar/rust?event=push&label=rust&logo=GitHub&style=flat-square)](https://github.com/qdeduction/qbar/actions)
 
 _the rational proof assistant_
 
