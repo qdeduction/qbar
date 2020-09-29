@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://qbar.io">
-    <img src="https://raw.githubusercontent.com/qdeduction/qdeduction.github.io/master/image/qbar_logo.png" width="150px">
+    <img src="https://raw.githubusercontent.com/qdeduction/qbar/master/docs/image/qbar_logo.png" width="150px">
 </a>
 
 # qbar
