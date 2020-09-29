@@ -6,7 +6,7 @@
 
 # qbar
 
-[![Workflow Status](https://img.shields.io/github/workflow/status/qdeduction/qbar/rust?label=workflow&style=flat-square)](https://github.com/qdeduction/qbar/actions)
+[![Workflow Status](https://img.shields.io/github/workflow/status/qdeduction/qbar/main?label=workflow&style=flat-square)](https://github.com/qdeduction/qbar/actions)
 [![Latest Version](https://img.shields.io/crates/v/qbar.svg?style=flat-square)](https://crates.io/crates/qbar)
 
 _the rational proof assistant_
