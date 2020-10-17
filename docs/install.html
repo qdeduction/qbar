@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Install qbar</title>
+  <meta name="description" content="Install qbar">
+  <meta name="author" content="Brandon H. Gomes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Install qbar">
+  <meta property="og:description" content="how to install qbar">
+  <meta property="og:url" content="http://qbar.io/install">
+  <meta property="og:site_name" content="Install qbar">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="font/Fira/family.css">
+  <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
+</head>
+<body>
+  <header id="header">
+    <div id="header-box" class="flex-center">
+      <a href="/" style="height: 42px">
+        <img id="header-icon" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg">
+      </a>
+      <div id="header-title">
+        <b style="font-size: 1.3em;">qbar</b>
+        <i style="color: red">(pre-&alpha;)</i>
+        <br>
+        <i style="font-size: 0.8em;">the rational proof assistant</i>
+      </div>
+      <div style="margin-left: auto">
+        <a class="menu-button" href="/docs.html">DOCS</a>
+      </div>
+      <div>
+        <a class="menu-button" href="https://github.com/qdeduction/qbar">SOURCE</a>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <h1>Installation</h1>
+    <h2>Warning!</h2>
+    <p>Right now, <b>qbar</b> is a work in progress, in the <i>pre-&alpha;</i> stage, so the API will fluctuate wildly. Operate at your own risk!</p>
+    <h2>Cargo</h2>
+    <a class="blank" href="https://github.com/qdeduction/qbar/actions">
+      <img alt="Worlflow Status" src="https://img.shields.io/github/workflow/status/qdeduction/qbar/main?label=workflow&style=flat-square">
+    </a>
+    <a class="blank" href="https://crates.io/crates/qbar">
+      <img alt="Latest Version" src="https://img.shields.io/crates/v/qbar.svg?style=flat-square">
+    </a>
+    <p>To install with cargo, run the following in a command prompt:</p>
+    <pre><code>cargo install <b>qbar</b></code></pre>
+    <p>To add the <b>qbar</b> API library to a Rust project, add the following to your <code>Cargo.toml</code>:</p>
+    <pre><code>[<span style="color: #6f42c1">dependencies</span>]<br>qbar = 0.0.0</code></pre>
+    <h2>Other Installation Methods</h2>
+    <p>There are no other installation methods at the moment, but you can download or clone the <a href="https://github.com/qdeduction/qbar">source code</a> in the meantime.</p>
+  </div>
+  <footer id="footer">
+    <hr>
+    <div class="flex-center footer-flex">
+      <div style="margin-right: auto">
+        2020 &copy; <a class="footer-link" href="https://bhgomes.dev">Brandon H. Gomes</a>
+      </div>
+      <a class="footer-link" href="/docs.html">DOCS</a>
+      <a href="/" id="footer-icon">
+        <img id="footer-icon" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg">
+      </a>
+      <a class="footer-link" href="/blog.html">BLOG</a>
+      <div style="margin-left: auto">
+        Last Updated: <a class="footer-link" href="https://github.com/qdeduction/qbar/tree/master/docs">2020-10-17</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
