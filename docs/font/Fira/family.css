@@ -1,6 +1,7 @@
 @font-face {
   font-family: FiraGo;
   src: url(FiraGO-Regular.woff2);
+  font-style: normal;
 }
 @font-face {
   font-family: FiraGo;
@@ -10,5 +11,20 @@
 @font-face {
   font-family: FiraGo;
   src: url(FiraGO-Bold.woff2);
+  font-weight: bold;
+}
+@font-face {
+  font-family: FiraMono;
+  src: url(FiraMono-Regular.woff2);
+  font-style: normal;
+}
+@font-face {
+  font-family: FiraMono;
+  src: url(FiraMono-Italic.woff2);
+  font-style: italic;
+}
+@font-face {
+  font-family: FiraMono;
+  src: url(FiraMono-Bold.woff2);
   font-weight: bold;
 }
