@@ -39,7 +39,10 @@ hr {
   padding-bottom: 0.6em;
   padding-left: 16vw;
   padding-right: 16vw;
-  background: #EBEBEB;
+  background: #FFFFFF;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #D0D0D0;
 }
 #header-icon {
   height: 42px;
