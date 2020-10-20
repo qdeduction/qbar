@@ -1,5 +1,5 @@
 body {
-  font-family: FiraGo;
+  font-family: IBMPlexSans;
 }
 code {
   padding: .1rem .3rem;
@@ -9,7 +9,7 @@ code {
   background: #F1F1F1;
   border: 1px solid #E1E1E1;
   border-radius: 4px;
-  font-family: FiraMono;
+  font-family: IBMPlexMono;
 }
 pre > code {
   display: block;

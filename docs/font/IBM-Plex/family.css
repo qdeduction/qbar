@@ -1,0 +1,31 @@
+@font-face {
+  font-family: IBMPlexSans;
+  src: url(IBMPlexSans-Regular.woff2);
+  font-style: normal;
+}
+@font-face {
+  font-family: IBMPlexSans-Italic;
+  src: url(IBMPlexSans-Italic.woff2);
+  font-style: italic;
+}
+@font-face {
+  font-family: IBMPlexSans-Bold;
+  src: url(IBMPlexSans-Bold.woff2);
+  font-weight: bold;
+}
+@font-face {
+  font-family: IBMPlexSans-BoldItalic;
+  src: url(IBMPlexSans-BoldItalic.woff2);
+  font-style: italic;
+  font-weight: bold;
+}
+@font-face {
+  font-family: IBMPlexMono;
+  src: url(IBMPlexMono-Regular.woff2);
+  font-style: normal;
+}
+@font-face {
+  font-family: IBMPlexMono-Bold;
+  src: url(IBMPlexMono-Bold.woff2);
+  font-weight: bold;
+}
