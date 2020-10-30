@@ -11,136 +11,39 @@
   <meta property="og:url" content="http://qbar.io">
   <meta property="og:site_name" content="qbar">
   <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="font/IBM-Plex/family.css">
   <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
-  <style>
-    body {
-      font-family: IBMPlexSans;
-      background: #FAFBFA;
-    }
-    .outer-frame {
-      display: table;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 0;
-      margin: 0;
-    }
-    .inner-frame {
-      display: table-cell;
-      vertical-align: middle;
-      padding-top: 3em;
-      padding-bottom: 3em;
-      margin: 0;
-    }
-    .columns {
-      text-align: center;
-    }
-    #logo {
-      width: 25vw;
-      /* filter: drop-shadow(1px 1px 0.3px rgba(0, 0, 0, 0.45)); */
-    }
-    #logo:hover {
-      filter: drop-shadow(0px 2px 0.5px rgba(0, 0, 0, 0.45));
-    }
-    .title {
-      font-size: 3.1em;
-      font-weight: bold;
-    }
-    .subtitle {
-      font-size: 1.2em;
-      font-weight: normal;
-      font-style: italic;
-      margin-bottom: 0;
-    }
-    .but {
-      text-decoration: none;
-      color: black;
-      border-color: grey;
-      border-style: solid;
-      padding-top: 0.3em;
-      padding-bottom: 0.3em;
-      padding-left: 0.7em;
-      padding-right: 0.7em;
-      background: #F5F5DC;
-      border-width: 1px;
-      border-radius: 5px;
-      box-shadow: 5px 8px 40px #EEEEEE;
-    }
-    .but:hover {
-      color: black;
-      border-color: black;
-      border-width: 1px;
-      background: #F2F2CF;
-      box-shadow: none;
-    }
-    .but-column {
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
-    footer {
-      text-align: center;
-      color: #BFBFBF;
-    }
-    .footer-link {
-      color: #BFBFBF;
-      text-decoration: none;
-    }
-    .footer-link:hover {
-      color: #A0A0A0;
-      text-decoration: underline;
-    }
-    @media (min-width: 550px) {
-      .container {
-        width: 452px; 
-      }
-      #logo {
-        width: 154px;
-      }
-      .subtitle {
-        margin-bottom: 2.5rem;
-      }
-      .but-row {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 2em;
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="outer-frame">
     <div class="inner-frame">
       <div class="container">
         <div class="row">
-          <div class="twelve columns">
+          <div class="column">
             <a href="https://github.com/qdeduction/qbar">
               <img id="logo" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg">
             </a>
           </div>
         </div>
         <div class="row" style="margin-top: 1em">
-          <div class="twelve columns">
+          <div class="column">
             <h1 class="title">qbar</h1>
             <p class="subtitle">the rational proof assistant</p>
           </div>
         </div>
-        <div class="row but-row">
-          <div class="one columns"><br></div>
-          <div class="three columns but-column">
-            <a class="but" href="/docs.html" style="font-size: 1.2em">DOCS</a>
+        <div class="row button-row">
+          <div class="small column"><br></div>
+          <div class="medium column button-column">
+            <a class="button" href="/docs.html" style="font-size: 1.2em">DOCS</a>
           </div>
-          <div class="four columns but-column">
-            <a class="but" href="/install.html" style="font-size: 1.6em">INSTALL</a>
+          <div class="large column button-column">
+            <a class="button" href="/install.html" style="font-size: 1.6em">INSTALL</a>
           </div>
-          <div class="three columns but-column">
-            <a class="but" href="/blog.html" style="font-size: 1.2em">BLOG</a>
+          <div class="medium column button-column">
+            <a class="button" href="/info.html" style="font-size: 1.2em">INFO</a>
           </div>
-          <div class="one columns"><br></div>
+          <div class="small column"><br></div>
         </div>
       </div>
       <footer>
