@@ -1,4 +1,4 @@
-// file: src/app/command.rs
+// file: src/command.rs
 // authors: Brandon H. Gomes
 
 //! Shell Commmand Interface

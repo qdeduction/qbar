@@ -1,7 +1,7 @@
-// file: src/app/term.rs
+// file: src/term.rs
 // authors: Brandon H. Gomes
 
-//! Terminal Utilities
+//! Terminal Utilities Module
 
 use {
     std::io::Write,

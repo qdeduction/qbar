@@ -1,10 +1,9 @@
-// file: src/app/mod.rs
+// file: src/app.rs
 // authors: Brandon H. Gomes
 
 //! Shell Application
 
-pub mod command;
-pub mod term;
+use crate::{command, term};
 
 /// Application exit status code.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
