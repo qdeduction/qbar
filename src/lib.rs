@@ -3,127 +3,9 @@
 
 //! The Rational Proof Assistant
 
-use core::iter::FromIterator;
+use {core::borrow::Borrow, rational_deduction::*};
 
-/// Expression Tree
-pub trait Expression
-where
-    Self: Sized,
-{
-    /// Atomic element type
-    type Atom;
-
-    /// Group expression type
-    type Group: Default
-        + Extend<Self>
-        + IntoIterator<Item = Self, IntoIter = Self::GroupIter>
-        + FromIterator<Self>;
-
-    /// Iterator type to read from [`Group`]
-    ///
-    /// [`Group`]: #associatedtype.Group
-    type GroupIter: Iterator<Item = Self>;
-
-    /// Convert to [canonical enumeration]
-    ///
-    /// [canonical enumeration]: enum.Expr.html
-    fn into_expr(self) -> Expr<Self>;
-
-    /// Build an `Expression` from an atomic element.
-    fn from_atom(atom: Self::Atom) -> Self;
-
-    /// Build an `Expression` from a grouped expression.
-    fn from_group(group: Self::Group) -> Self;
-
-    /// Convert from [canonical enumeration]
-    ///
-    /// [canonical enumeration]: enum.Expr.html
-    fn from_expr(expr: Expr<Self>) -> Self {
-        match expr {
-            Expr::Atom(atom) => Self::from_atom(atom),
-            Expr::Group(group) => Self::from_group(group),
-        }
-    }
-
-    /// Get default `Expression` from canonical enumeration
-    fn default() -> Self {
-        Self::from_expr(Default::default())
-    }
-}
-
-/// Canonical Concrete Expression Type
-#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-pub enum Expr<E>
-where
-    E: Expression,
-{
-    /// Atomic element
-    Atom(E::Atom),
-
-    /// Grouped expression
-    Group(E::Group),
-}
-
-impl<E> Expr<E>
-where
-    E: Expression,
-{
-    /// Check if expression is an atomic expression
-    #[must_use]
-    pub fn is_atom(&self) -> bool {
-        match self {
-            Expr::Atom(_) => true,
-            _ => false,
-        }
-    }
-
-    /// Check if expression is a grouped expression
-    #[must_use]
-    pub fn is_group(&self) -> bool {
-        match self {
-            Expr::Group(_) => true,
-            _ => false,
-        }
-    }
-}
-
-impl<E> Default for Expr<E>
-where
-    E: Expression,
-{
-    /// Default Expr
-    ///
-    /// The default expression is the empty group expression.
-    fn default() -> Self {
-        Self::Group(E::Group::default())
-    }
-}
-
-impl<E> Expression for Expr<E>
-where
-    E: Expression,
-{
-    type Atom = E::Atom;
-
-    type Group = expr::ExprGroup<E>;
-
-    type GroupIter = expr::ExprGroupIter<E>;
-
-    fn into_expr(self) -> Expr<Self> {
-        match self {
-            Expr::Atom(atom) => Expr::Atom(atom),
-            Expr::Group(group) => Expr::Group(expr::ExprGroup { group }),
-        }
-    }
-
-    fn from_atom(atom: <Self as Expression>::Atom) -> Self {
-        Self::Atom(atom)
-    }
-
-    fn from_group(group: <Self as Expression>::Group) -> Self {
-        Self::Group(group.group)
-    }
-}
+pub mod app;
 
 /// Parsed Expression
 pub trait ParsedExpression
@@ -131,157 +13,384 @@ where
     Self: Expression,
 {
     /// Parse an `Expression` using a given classification scheme
-    fn parse<T, C, I>(classify: C, iter: I) -> expr::parse::Result<Self>
+    fn parse<T, C, I>(classify: C, iter: I) -> parse::Result<Self>
     where
         Self::Atom: Default + Extend<T>,
-        C: Fn(&T) -> expr::parse::SymbolType,
-        I: IntoIterator<Item = T>;
+        C: Fn(&T) -> parse::SymbolType,
+        I: IntoIterator<Item = T>,
+    {
+        parse::parse(classify, iter)
+    }
 }
 
-/// Expression Module
-pub mod expr {
+/// Expression Parsing Module
+pub mod parse {
     use {
-        super::{Expr, Expression},
-        core::iter::FromIterator,
+        super::*,
+        core::{iter::Peekable, result},
     };
 
-    /// Expression Group Container
-    pub struct ExprGroup<E>
-    where
-        E: Expression,
-    {
-        pub group: E::Group,
+    /// Expression Parsing Error
+    #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+    pub enum Error {
+        /// Multiple expressions at top level
+        MultiExpr,
+
+        /// No closing quote
+        MissingQuote,
+
+        /// Group was not closed
+        OpenGroup,
+
+        /// Group was not opened
+        UnopenedGroup,
     }
 
-    impl<E> Default for ExprGroup<E>
-    where
-        E: Expression,
-    {
-        fn default() -> Self {
-            ExprGroup {
-                group: E::Group::default(),
-            }
-        }
+    /// Expression Parsing Result Alias
+    pub type Result<T> = result::Result<T, Error>;
+
+    /// Meaningful symbols for parsing algorithm
+    #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+    pub enum SymbolType {
+        /// Whitespace
+        Whitespace,
+
+        /// Start of a group
+        GroupOpen,
+
+        /// End of a group
+        GroupClose,
+
+        /// Start of a quoted sub-string
+        Quote,
+
+        /// Other characters
+        Other,
     }
 
-    impl<E> Extend<Expr<E>> for ExprGroup<E>
-    where
-        E: Expression,
-    {
-        fn extend<I>(&mut self, iter: I)
+    impl SymbolType {
+        /// Checks if the classified symbol is whitespace
+        pub fn is_whitespace<T, C>(classify: C) -> impl Fn(&T) -> bool
         where
-            I: IntoIterator<Item = Expr<E>>,
+            C: Fn(&T) -> SymbolType,
         {
-            self.group.extend(iter.into_iter().map(E::from_expr))
+            move |t| classify(t) == SymbolType::Whitespace
         }
-    }
 
-    impl<E> IntoIterator for ExprGroup<E>
-    where
-        E: Expression,
-    {
-        type Item = Expr<E>;
-
-        type IntoIter = ExprGroupIter<E>;
-
-        fn into_iter(self) -> Self::IntoIter {
-            ExprGroupIter {
-                iter: self.group.into_iter(),
-            }
-        }
-    }
-
-    impl<E> FromIterator<Expr<E>> for ExprGroup<E>
-    where
-        E: Expression,
-    {
-        fn from_iter<I>(iter: I) -> Self
+        /// Checks if the classified symbol is not whitespace
+        pub fn is_not_whitespace<T, C>(classify: C) -> impl Fn(&T) -> bool
         where
-            I: IntoIterator<Item = Expr<E>>,
+            C: Fn(&T) -> SymbolType,
         {
-            Self {
-                group: E::Group::from_iter(iter.into_iter().map(E::from_expr)),
-            }
+            move |t| classify(t) != SymbolType::Whitespace
         }
     }
 
-    /// Expression Group Container Iterator
-    pub struct ExprGroupIter<E>
+    pub(crate) fn parse<T, E, C, I>(classify: C, iter: I) -> Result<E>
     where
         E: Expression,
+        E::Atom: Default + Extend<T>,
+        C: Fn(&T) -> SymbolType,
+        I: IntoIterator<Item = T>,
     {
-        iter: E::GroupIter,
+        let mut stripped = iter
+            .into_iter()
+            .skip_while(SymbolType::is_whitespace(&classify))
+            .peekable();
+        match stripped.next() {
+            Some(first) => match classify(&first) {
+                SymbolType::GroupOpen => parse_group(&classify, stripped),
+                SymbolType::GroupClose => Err(Error::UnopenedGroup),
+                _ => {
+                    let atom =
+                        parse_atom_without_leading_whitespace(&classify, first, &mut stripped)?;
+                    if let Some(next) = stripped.next() {
+                        match classify(&next) {
+                            SymbolType::Whitespace => {
+                                if stripped.any(|t| SymbolType::is_not_whitespace(&classify)(&t)) {
+                                    return Err(Error::MultiExpr);
+                                }
+                            }
+                            SymbolType::GroupOpen | SymbolType::GroupClose => {
+                                return Err(Error::MultiExpr);
+                            }
+                            _ => {}
+                        }
+                    }
+                    Ok(atom)
+                }
+            },
+            _ => Ok(E::from_atom(Default::default())),
+        }
     }
 
-    impl<E> Iterator for ExprGroupIter<E>
+    pub(crate) fn parse_group<T, E, C, I>(classify: C, mut iter: Peekable<I>) -> Result<E>
     where
         E: Expression,
+        E::Atom: Default + Extend<T>,
+        C: Fn(&T) -> SymbolType,
+        I: Iterator<Item = T>,
     {
-        type Item = Expr<E>;
-
-        fn next(&mut self) -> Option<Self::Item> {
-            self.iter.next().map(E::into_expr)
+        let mut groups = Vec::default();
+        groups.push(E::Group::default());
+        while let Some(next) = iter.next() {
+            match classify(&next) {
+                SymbolType::Whitespace => continue,
+                SymbolType::GroupOpen => groups.push(E::Group::default()),
+                SymbolType::GroupClose => {
+                    let last = E::from_group(groups.pop().unwrap());
+                    if groups.is_empty() {
+                        return if iter.find(SymbolType::is_not_whitespace(classify)).is_none() {
+                            Ok(last)
+                        } else {
+                            Err(Error::MultiExpr)
+                        };
+                    } else {
+                        groups.last_mut().unwrap().extend(Some(last));
+                    }
+                }
+                _ => {
+                    groups
+                        .last_mut()
+                        .unwrap()
+                        .extend(Some(parse_atom_without_leading_whitespace(
+                            &classify, next, &mut iter,
+                        )?))
+                }
+            }
         }
+        Err(Error::OpenGroup)
     }
 
-    /// Expression Parsing Module
-    pub mod parse {
-        use core::result;
-
-        /// Expression Parsing Error
-        #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-        pub enum Error {
-            /// Multiple expressions at top level
-            MultiExpr,
-
-            /// No closing quote
-            MissingQuote,
-
-            /// Group was not closed
-            OpenGroup,
-
-            /// Group was not opened
-            UnopenedGroup,
-        }
-
-        /// Expression Parsing Result Alias
-        pub type Result<T> = result::Result<T, Error>;
-
-        /// Meaningful symbols for parsing algorithm
-        #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-        pub enum SymbolType {
-            /// Whitespace
-            Whitespace,
-
-            /// Start of a group
-            GroupOpen,
-
-            /// End of a group
-            GroupClose,
-
-            /// Start of a quoted sub-string
-            Quote,
-
-            /// Other characters
-            Other,
-        }
-
-        impl SymbolType {
-            /// Checks if the classified symbol is whitespace
-            pub fn is_whitespace<T, C>(classify: C) -> impl Fn(&T) -> bool
-            where
-                C: Fn(&T) -> SymbolType,
-            {
-                move |t| classify(t) == SymbolType::Whitespace
+    pub(crate) fn parse_atom_without_leading_whitespace<T, E, C, I>(
+        classify: C,
+        head: T,
+        tail: &mut Peekable<I>,
+    ) -> Result<E>
+    where
+        E: Expression,
+        E::Atom: Default + Extend<T>,
+        C: Fn(&T) -> SymbolType,
+        I: Iterator<Item = T>,
+    {
+        let mut atom = E::Atom::default();
+        match classify(&head) {
+            SymbolType::Quote => {
+                if !parse_quoted_atom(&classify, head, tail, &mut atom) {
+                    return Err(Error::MissingQuote);
+                }
             }
-
-            /// Checks if the classified symbol is not whitespace
-            pub fn is_not_whitespace<T, C>(classify: C) -> impl Fn(&T) -> bool
-            where
-                C: Fn(&T) -> SymbolType,
-            {
-                move |t| classify(t) != SymbolType::Whitespace
+            _ => atom.extend(Some(head)),
+        }
+        while let Some(peek) = tail.peek() {
+            match classify(&peek) {
+                SymbolType::Whitespace | SymbolType::GroupOpen | SymbolType::GroupClose => {
+                    break;
+                }
+                SymbolType::Quote => {
+                    if !parse_quoted_atom(&classify, tail.next().unwrap(), tail, &mut atom) {
+                        return Err(Error::MissingQuote);
+                    }
+                }
+                _ => atom.extend(tail.next()),
             }
+        }
+        Ok(E::from_atom(atom))
+    }
+
+    pub(crate) fn parse_quoted_atom<T, A, C, I>(
+        classify: C,
+        head: T,
+        tail: &mut I,
+        atom: &mut A,
+    ) -> bool
+    where
+        A: Default + Extend<T>,
+        C: Fn(&T) -> SymbolType,
+        I: Iterator<Item = T>,
+    {
+        atom.extend(Some(head));
+        tail.any(move |a| {
+            let symbol_type = classify(&a);
+            atom.extend(Some(a));
+            symbol_type == SymbolType::Quote
+        })
+    }
+}
+
+/// Database key which generates a default value.
+pub trait DatabaseKey<V> {
+    /// Generate a key from the value.
+    fn from_value(value: &V) -> Self;
+}
+
+/// Database entry which represents a key value pair with possibly generated keys.
+pub trait DatabaseEntry<K, V>
+where
+    K: DatabaseKey<V>,
+{
+    /// Get the database key.
+    fn key(&self) -> &K;
+
+    /// Get the database value.
+    fn value(&self) -> &V;
+
+    /// Generate a new entry from a key and a value.
+    fn new(key: K, value: V) -> Self;
+
+    /// Generate a new entry from a value using the generated key.
+    fn from_value(value: V) -> Self
+    where
+        Self: Sized,
+    {
+        Self::new(K::from_value(&value), value)
+    }
+}
+
+/// Database Trait
+pub trait Database<K, V>
+where
+    K: DatabaseKey<V>,
+{
+    /// Returns a reference to the value corresponding to the key.
+    fn get<Q>(&self, k: &Q) -> Option<&V>
+    where
+        Q: ?Sized + Borrow<K>;
+
+    /// Returns a mutable reference to the value corresponding to the key.
+    fn get_mut<Q>(&mut self, k: &Q) -> Option<&mut V>
+    where
+        Q: ?Sized + Borrow<K>;
+
+    /// Returns `true` if the database contains a value for the specified key.
+    fn contains_key<Q>(&self, k: &Q) -> bool
+    where
+        Q: ?Sized + Borrow<K>;
+
+    /// Returns `true` if the database contains the value.
+    fn contains_value(&self, v: &V) -> bool {
+        self.contains_key(&K::from_value(v))
+    }
+
+    /// Inserts a key-value pair into the database.
+    fn insert(&mut self, k: K, v: V) -> Option<K>;
+
+    /// Inserts a value into the database using the generated key.
+    fn insert_value(&mut self, v: V) -> Option<K>;
+
+    /// Removes a key from the database, returning the value at the key if the
+    /// key was previously in the map.
+    fn remove<Q>(&mut self, k: &Q) -> Option<V>
+    where
+        Q: ?Sized + Borrow<K>;
+
+    /// Removes a value from the database using the generated key, returning
+    /// the value if the value was previously in the database.
+    fn remove_value(&mut self, v: &V) -> Option<V> {
+        self.remove(&K::from_value(v))
+    }
+
+    /// Retains only the elements specified by the predicate.
+    fn retain<F>(&mut self, f: F)
+    where
+        F: FnMut(&K, &mut V) -> bool;
+
+    /// Get the length of the database.
+    fn len(&self) -> usize;
+
+    /// Check if the database is empty.
+    fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
+    /// Clears the database.
+    fn clear(&mut self);
+}
+
+/// Expression Database Utilities
+pub mod database {}
+
+/// Hashing Utilities
+pub mod hash {
+    use std::{
+        io::{self, Write},
+        process,
+    };
+
+    /// Hash with traced source
+    #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
+    pub struct NamedHash<H, S> {
+        /// Hash value
+        pub hash: H,
+
+        /// Hash source
+        pub source: S,
+    }
+
+    /// Source of hash which results from a process.
+    #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
+    pub struct HashProcessSource<'s> {
+        /// Hash command
+        pub command: &'s str,
+
+        /// Command arguments
+        pub args: &'s [&'s str],
+    }
+
+    /// Hash which results from a process.
+    pub type HashFromProcess<'s> = NamedHash<String, HashProcessSource<'s>>;
+
+    /// Compute hash from a process.
+    pub fn from_process<'s, S>(
+        command: &'s str,
+        args: &'s [&str],
+        input: S,
+    ) -> io::Result<HashFromProcess<'s>>
+    where
+        S: AsRef<str>,
+    {
+        let mut child = process::Command::new(command)
+            .args(args)
+            .stdin(process::Stdio::piped())
+            .stdout(process::Stdio::piped())
+            .spawn()?;
+        match child.stdin.as_mut() {
+            Some(stdin) => stdin.write_all(input.as_ref().as_bytes())?,
+            _ => return Err(io::Error::new(io::ErrorKind::Other, "unable to open stdin")),
+        }
+        Ok(NamedHash {
+            hash: String::from(String::from_utf8_lossy(&child.wait_with_output()?.stdout).trim()),
+            source: HashProcessSource { command, args },
+        })
+    }
+
+    /// Compute hash from `HashProcessSource`.
+    pub fn from_process_source<'s, S>(
+        source: &HashProcessSource<'s>,
+        input: S,
+    ) -> io::Result<HashFromProcess<'s>>
+    where
+        S: AsRef<str>,
+    {
+        from_process(source.command, source.args, input)
+    }
+
+    /// Implemented Hashing Algorithms
+    pub mod algorithms {
+        use super::*;
+
+        /// Blake3 Hashing Parameters
+        pub const BLAKE3_HASH_SOURCE: HashProcessSource<'static> = HashProcessSource {
+            command: "b3sum",
+            args: &["--no-names"],
+        };
+
+        /// Blake3 Hashing Algorithm
+        pub fn blake3<S>(input: S) -> io::Result<HashFromProcess<'static>>
+        where
+            S: AsRef<str>,
+        {
+            from_process_source(&BLAKE3_HASH_SOURCE, input)
         }
     }
 }

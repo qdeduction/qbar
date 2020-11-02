@@ -1,8 +1,8 @@
 [package]
 name = "qbar"
-version = "0.0.0"
+version = "0.0.1-alpha"
 edition = "2018"
-authors = ["Brandon H. Gomes <bhgomes.github@gmail.com>"]
+authors = ["Brandon H. Gomes <bh.gomes@rutgers.edu>"]
 homepage = "https://qbar.io"
 documentation = "https://docs.rs/qbar"
 repository = "https://github.com/qdeduction/qbar"
@@ -12,6 +12,7 @@ keywords = ["cli", "proof assistant"]
 categories = ["command-line-utilities"]
 description = "the rational proof assistant"
 exclude = ["docs/**/*"]
+publish = false
 
 [badges]
 is-it-maintained-issue-resolution = { repository = "qdeduction/qbar" }
@@ -19,5 +20,7 @@ is-it-maintained-open-issues = { repository = "qdeduction/qbar" }
 maintenance = { status = "actively-developed" }
 
 [dependencies]
+rational_deduction = { git = "https://github.com/qdeduction/rational_deduction.rs" }
 terminal = { version = "0.2.1", features = ["crossterm-backend"] }
+b3sum = { version = "0.3.7" }
 
