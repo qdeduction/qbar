@@ -1,6 +1,11 @@
 // file: src/main.rs
 // authors: Brandon H. Gomes
 
-fn main() {
-    println!("This project is currently in development.\n\rThe purpose of this crate is to reserve the package name.\n\rIf you believe that this is a mistake email Brandon H. Gomes at bhgomes@pm.me");
+use {
+    qbar::app,
+    std::{env, process},
+};
+
+pub fn main() {
+    process::exit(app::run(env::args().skip(1)).report())
 }
