@@ -1,0 +1,35 @@
+[tasks.clean-wasm]
+command = "rm"
+args = ["-rf", "js"]
+
+[tasks.clean-rust]
+command = "cargo"
+args = ["clean"]
+
+[tasks.clean]
+dependencies = [
+    "clean-wasm",
+    "clean-rust",
+]
+
+[tasks.build-wasm]
+command = "wasm-pack"
+args = [
+    "build",
+    "--release", 
+    "--target", "web",
+    "--out-name", "wasm",
+    "--out-dir", "target/wasm"
+]
+
+[tasks.extract-wasm]
+script = '''
+mkdir -p js
+mv target/wasm/wasm.js target/wasm/wasm_bg.wasm js/
+'''
+
+[tasks.build]
+dependencies = [
+    "build-wasm",
+    "extract-wasm",
+]

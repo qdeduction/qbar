@@ -1,0 +1,22 @@
+[package]
+name = "qbar-web-app"
+version = "0.0.0"
+edition = "2018"
+readme = "../../README.md"
+license-file = "../../LICENSE"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+panic = 'abort' 
+codegen-units = 1
+opt-level = 'z' 
+lto = true
+
+[dependencies]
+# TODO: qbar = { path = "../../" }
+yew = "0.17"
+wasm-bindgen = "0.2"
+wee_alloc = "0.4.5"
