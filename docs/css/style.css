@@ -46,6 +46,7 @@ hr {
 }
 #header-icon {
   height: 42px;
+  display: block;
 }
 #header-icon:hover {
   filter: invert(30%);
@@ -90,6 +91,7 @@ div > .menu-button {
 }
 #footer-icon {
   height: 30px;
+  display: block;
   filter: invert(50%);
 }
 #footer-icon:hover {
