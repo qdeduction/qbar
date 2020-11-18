@@ -65,14 +65,13 @@ footer {
     background: #F5F5DC;
 }
 .welcome-screen {
-    width: 70%;
+    width: 68%;
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 2em;
+    padding: 1em;
 }
 .welcome-title {
     font-size: 1.5em;
@@ -86,7 +85,7 @@ footer {
     font-family: IBMPlexMono;
     font-size: 1em;
 }
-.cmdline {
+#command-line {
     width: 100%;
     box-sizing: border-box;
     padding: 3px;
@@ -100,10 +99,10 @@ footer {
 }
 @media (min-width: 900px) {
     .welcome-screen {
-        width: 590px;
+        width: 500px;
     }
     .container {
-        margin-left: 12vw;
-        margin-right: 12vw;
+        margin-left: 10vw;
+        margin-right: 10vw;
     }
 }

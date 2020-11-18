@@ -41,7 +41,7 @@ impl Model {
     ///
     pub fn view_input(&self) -> Html {
         html! {
-            <input class="cmdline"
+            <input id="command-line"
                    autofocus=true
                    type="text"
                    name="command line"
