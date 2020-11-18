@@ -60,7 +60,7 @@ impl Model {
             html! {
                 <div class="screen-wrapper flex-reverse">
                     <ul class="screen">
-                        { for self.state.entries.iter().map(|e| Self::view_entry(e)) }
+                        { for self.state.entries.iter().map(|e| self.view_entry(e)) }
                     </ul>
                 </div>
             }
@@ -78,7 +78,9 @@ impl Model {
     pub fn view_welcome_screen(&self) -> Html {
         html! {
             <div class="welcome-screen">
-                <p><b>{"qbar"}</b>{" | "}<i>{"the rational proof assistant"}</i></p>
+                <h1 class="welcome-title">
+                    <b>{"qbar"}</b>{" | "}<i>{"the rational proof assistant"}</i>
+                </h1>
                 <p>
                     {"The following is a demo version of the rational proof assistant. See the "}
                     <a href="https://qbar.io/install">{"install page"}</a>
@@ -92,9 +94,9 @@ impl Model {
 
     ///
     ///
-    pub fn view_entry(entry: &str) -> Html {
+    pub fn view_entry(&self, entry: &str) -> Html {
         html! {
-            <li class="command"> { entry } </li>
+            <li class="command"> {entry} </li>
         }
     }
 
@@ -181,7 +183,14 @@ impl Component for Model {
                         "clear" => {
                             let _ = self.update(Msg::Clear);
                         }
-                        _ => self.state.entries.push(self.state.value.to_owned()),
+                        "help" | "?" => {
+                            self.state.entries.push("help information ...".to_owned());
+                        }
+                        _ => {
+                            self.state
+                                .entries
+                                .push(format!("missing command: {}", self.state.value).to_owned());
+                        }
                     }
                     self.state.started = true;
                 }
