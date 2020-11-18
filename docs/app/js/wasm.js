@@ -461,7 +461,7 @@ async function init(input) {
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
-    imports.wbg.__wbindgen_closure_wrapper3149 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper3150 = function(arg0, arg1, arg2) {
         var ret = makeMutClosure(arg0, arg1, 31, __wbg_adapter_16);
         return addHeapObject(ret);
     };

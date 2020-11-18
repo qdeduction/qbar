@@ -21,6 +21,7 @@ pub struct Model {
 pub struct State {
     entries: Vec<String>,
     value: String,
+    started: bool,
 }
 
 impl State {
@@ -30,6 +31,7 @@ impl State {
         State {
             entries: Vec::new(),
             value: String::new(),
+            started: false,
         }
     }
 }
@@ -40,6 +42,9 @@ impl Model {
     pub fn view_input(&self) -> Html {
         html! {
             <input class="cmdline"
+                   autofocus=true
+                   type="text"
+                   name="command line"
                    value=&self.state.value
                    oninput=self.link.callback(|e: InputData| Msg::Update(e.value))
                    onkeypress=self.link.callback(|e: KeyboardEvent| {
@@ -51,11 +56,36 @@ impl Model {
     ///
     ///
     pub fn view_screen(&self) -> Html {
+        if self.state.started {
+            html! {
+                <div class="screen-wrapper flex-reverse">
+                    <ul class="screen">
+                        { for self.state.entries.iter().map(|e| Self::view_entry(e)) }
+                    </ul>
+                </div>
+            }
+        } else {
+            html! {
+                <div class="screen-wrapper">
+                    { self.view_welcome_screen() }
+                </div>
+            }
+        }
+    }
+
+    ///
+    ///
+    pub fn view_welcome_screen(&self) -> Html {
         html! {
-            <div class="screen-wrapper">
-                <ul class="screen">
-                    { for self.state.entries.iter().map(|e| Self::view_entry(e)) }
-                </ul>
+            <div class="welcome-screen">
+                <p><b>{"qbar"}</b>{" | "}<i>{"the rational proof assistant"}</i></p>
+                <p>
+                    {"The following is a demo version of the rational proof assistant. See the "}
+                    <a href="https://qbar.io/install">{"install page"}</a>
+                    {" for more information on the latest version of the full command line application."}
+                </p>
+                <br/>
+                <p>{"type "}<b><code>{"?"}</code></b>{" for help information"}</p>
             </div>
         }
     }
@@ -153,6 +183,7 @@ impl Component for Model {
                         }
                         _ => self.state.entries.push(self.state.value.to_owned()),
                     }
+                    self.state.started = true;
                 }
                 self.state.value = "".to_owned();
             }
