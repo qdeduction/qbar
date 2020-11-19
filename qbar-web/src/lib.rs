@@ -1,7 +1,7 @@
 // file: src/lib.rs
 // authors: Brandon H. Gomes
 
-//! QBar Web Application
+//! Web Application
 
 use wasm_bindgen::prelude::*;
 use yew::prelude::*;
@@ -33,6 +33,12 @@ impl State {
             value: String::new(),
             started: false,
         }
+    }
+}
+
+impl Default for State {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -189,7 +195,7 @@ impl Component for Model {
                         _ => {
                             self.state
                                 .entries
-                                .push(format!("missing command: {}", self.state.value).to_owned());
+                                .push(format!("missing command: {}", self.state.value));
                         }
                     }
                     self.state.started = true;

@@ -1,6 +1,6 @@
 [tasks.clean-wasm]
 command = "rm"
-args = ["-rf", "js"]
+args = ["-rf", "../docs/js"]
 
 [tasks.clean-rust]
 command = "cargo"
@@ -19,13 +19,13 @@ args = [
     "--release", 
     "--target", "web",
     "--out-name", "wasm",
-    "--out-dir", "target/wasm"
+    "--out-dir", "../target/wasm"
 ]
 
 [tasks.extract-wasm]
 script = '''
-mkdir -p js
-mv target/wasm/wasm.js target/wasm/wasm_bg.wasm js/
+mkdir -p ../docs/js
+mv ../target/wasm/wasm.js ../target/wasm/wasm_bg.wasm ../docs/js/
 '''
 
 [tasks.build]
