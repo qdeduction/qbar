@@ -1,0 +1,2 @@
+(prompt "q❯ ")
+(history (file "~/.config/qbar/HISTORY" count 100000))
