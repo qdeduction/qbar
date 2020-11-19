@@ -26,7 +26,7 @@ header {
     text-align: center;
 }
 .container {
-    margin: 2.5em;
+    margin: 2em;
 }
 footer {
     font-size: 0.9375em;
@@ -55,7 +55,7 @@ footer {
     box-sizing: border-box;
     min-height: 60vh;
     max-height: 60vh;
-    overflow: scroll;
+    overflow-y: scroll;
     position: relative;
     margin-bottom: 1em;
     border-style: solid;
@@ -79,11 +79,17 @@ footer {
 }
 .screen {
     padding-left: 1em;
+    padding-right: 1em;
 }
-.command {
+ul li {
     list-style-type: none;
+}
+.entry {
     font-family: IBMPlexMono;
     font-size: 1em;
+    margin: 0;
+    word-break: break-all;
+    white-space: normal;
 }
 #command-line {
     width: 100%;

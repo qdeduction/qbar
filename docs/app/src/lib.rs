@@ -96,7 +96,7 @@ impl Model {
     ///
     pub fn view_entry(&self, entry: &str) -> Html {
         html! {
-            <li class="command"> {entry} </li>
+            <li><pre class="entry">{entry}</pre></li>
         }
     }
 
