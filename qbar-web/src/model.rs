@@ -3,51 +3,30 @@
 
 //! Application Model
 
-use yew::prelude::*;
+use {
+    crate::term::Terminal,
+    qbar_core::term::{Term, TermDone, Writer},
+    yew::prelude::*,
+};
 
-///
-///
+/// Application Model
+#[derive(Clone, Debug)]
 pub struct Model {
     link: ComponentLink<Self>,
-    state: State,
-}
-
-///
-///
-pub struct State {
-    entries: Vec<String>,
+    terminal: Terminal,
     value: String,
     started: bool,
 }
 
-impl State {
-    ///
-    ///
-    pub fn new() -> Self {
-        State {
-            entries: Vec::new(),
-            value: String::new(),
-            started: false,
-        }
-    }
-}
-
-impl Default for State {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 impl Model {
-    ///
-    ///
+    /// Get the command line input view.
     pub fn view_input(&self) -> Html {
         html! {
             <input id="command-line"
                    autofocus=true
                    type="text"
                    name="command line"
-                   value=&self.state.value
+                   value=&self.value
                    oninput=self.link.callback(|e: InputData| Msg::Update(e.value))
                    onkeypress=self.link.callback(|e: KeyboardEvent| {
                        if e.key() == "Enter" { Msg::Run } else { Msg::None }
@@ -55,15 +34,12 @@ impl Model {
         }
     }
 
-    ///
-    ///
+    /// Get the terminal screen view.
     pub fn view_screen(&self) -> Html {
-        if self.state.started {
+        if self.started {
             html! {
                 <div class="screen-wrapper flex-reverse">
-                    <ul class="screen">
-                        { for self.state.entries.iter().map(|e| self.view_entry(e)) }
-                    </ul>
+                    { self.terminal.get_html() }
                 </div>
             }
         } else {
@@ -75,8 +51,7 @@ impl Model {
         }
     }
 
-    ///
-    ///
+    /// Get the welcome screen view.
     pub fn view_welcome_screen(&self) -> Html {
         html! {
             <div class="welcome-screen">
@@ -94,17 +69,9 @@ impl Model {
         }
     }
 
-    ///
-    ///
-    pub fn view_entry(&self, entry: &str) -> Html {
-        html! {
-            <li><pre class="entry">{entry}</pre></li>
-        }
-    }
-
-    ///
-    ///
+    /// Get the header view.
     pub fn view_header(&self) -> Html {
+        // TODO: pass this to static html
         html! {
             <header>
                 <a target="_blank" rel="noreferrer" href="https://qbar.io">
@@ -114,9 +81,9 @@ impl Model {
         }
     }
 
-    ///
-    ///
+    /// Get the footer view.
     pub fn view_footer(&self) -> Html {
+        // TODO: pass this to static html
         html! {
             <footer>
                 {"2020 © "}
@@ -126,33 +93,54 @@ impl Model {
             </footer>
         }
     }
+
+    /// Clear terminal.
+    pub fn clear(&mut self) {
+        let _ = self.terminal.clear_all();
+    }
+
+    /// Run the current active command.
+    pub fn run(&mut self) -> TermDone<Terminal> {
+        let cmd = self.value.trim();
+        if !cmd.is_empty() {
+            match cmd {
+                "clear" => self.clear(),
+                "help" | "?" => {
+                    let _ = self.terminal.log_info("help information ...")?.done();
+                }
+                _ => {
+                    let _ = self
+                        .terminal
+                        .log_err(format!("missing command: {}", self.value))?
+                        .done();
+                }
+            }
+            self.started = true;
+        }
+        self.value = "".to_owned();
+        Ok(())
+    }
 }
 
-///
-///
+/// User Message
+#[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum Msg {
-    ///
-    ///
+    /// Update the command line
     Update(String),
 
-    ///
-    ///
+    /// Clear the screen
     Clear,
 
-    ///
-    ///
+    /// Move up in the command history
     Up,
 
-    ///
-    ///
+    /// Move down in the command history
     Down,
 
-    ///
-    ///
+    /// Run the current active command
     Run,
 
-    ///
-    ///
+    /// Do nothing
     None,
 }
 
@@ -161,63 +149,49 @@ impl Component for Model {
 
     type Properties = ();
 
+    #[inline]
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         Self {
             link,
-            state: State::new(),
+            terminal: Default::default(),
+            value: Default::default(),
+            started: false,
         }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::Update(text) => {
-                self.state.value = text;
+                self.value = text;
             }
-            Msg::Clear => {
-                self.state.entries.clear();
-            }
+            Msg::Clear => self.clear(),
             Msg::Up => todo!(),
             Msg::Down => todo!(),
             Msg::Run => {
-                let cmd = self.state.value.trim();
-                if !cmd.is_empty() {
-                    match cmd {
-                        "clear" => {
-                            let _ = self.update(Msg::Clear);
-                        }
-                        "help" | "?" => {
-                            self.state.entries.push("help information ...".to_owned());
-                        }
-                        _ => {
-                            self.state
-                                .entries
-                                .push(format!("missing command: {}", self.state.value));
-                        }
-                    }
-                    self.state.started = true;
-                }
-                self.state.value = "".to_owned();
+                let _ = self.run();
             }
             Msg::None => {}
         }
         true
     }
 
+    #[inline]
     fn change(&mut self, _: Self::Properties) -> ShouldRender {
         false
     }
 
     fn view(&self) -> Html {
+        // TODO: how much of this can be put in static html?
         html! {
             <div id="outer-frame">
-            <div id="inner-frame">
-            { self.view_header() }
-            <div class="container">
-                { self.view_screen() }
-                { self.view_input() }
-            </div>
-            { self.view_footer() }
-            </div>
+                <div id="inner-frame">
+                    { self.view_header() }
+                    <div class="container">
+                        { self.view_screen() }
+                        { self.view_input() }
+                    </div>
+                    { self.view_footer() }
+                </div>
             </div>
         }
     }

@@ -5,17 +5,20 @@
 
 use {
     core::fmt,
-    qbar_core::term::{
-        Attribute, Clear, Color, Event, Term, TermContinue, TermDone, TermReturn, WriteStyle,
-        Writer, WriterContinue, WriterDone,
+    qbar_core::{
+        command::CommandHistory,
+        term::{
+            Attribute, Clear, Color, Event, Term, TermContinue, TermDone, TermReturn, WriteStyle,
+            Writer, WriterContinue, WriterDone,
+        },
     },
     std::collections::VecDeque,
     yew::{html, Html},
 };
 
 /// Convert a string to a `<pre>` element.
-pub fn preformatted(text: &str) -> Html {
-    html! { <pre>{text}</pre> }
+pub fn preformatted(style: &str, text: &str) -> Html {
+    html! { <pre class="entry" style=style>{text}</pre> }
 }
 
 /// Color to RGB style text.
@@ -69,17 +72,15 @@ pub fn add_attribute(attr: Attribute, html: Html) -> Html {
 /// Convert styled text to HTML.
 pub fn styled_text_to_html(text: &str, style: WriteStyle) -> Html {
     match style {
-        WriteStyle::None => preformatted(text),
-        WriteStyle::Foreground(color) => html! {
-            <pre style={as_foreground(color)}>{text}</pre>
-        },
-        WriteStyle::Background(color) => html! {
-            <pre style={as_background(color)}>{text}</pre>
-        },
-        WriteStyle::Color(foreground, background) => html! {
-            <pre style={as_color_style(foreground, background)}>{text}</pre>
-        },
-        WriteStyle::Attribute(attr) => add_attribute(attr, preformatted(text)),
+        WriteStyle::None => preformatted("", text),
+        WriteStyle::Foreground(color) => preformatted(&as_foreground(color), text),
+        WriteStyle::Background(color) => preformatted(&as_background(color), text),
+        WriteStyle::Color(foreground, background) => {
+            preformatted(&as_color_style(foreground, background), text)
+        }
+        WriteStyle::Attribute(attr) => {
+            add_attribute(attr, styled_text_to_html(text, WriteStyle::None))
+        }
         WriteStyle::ForegroundAttribute(color, attr) => add_attribute(
             attr,
             styled_text_to_html(text, WriteStyle::Foreground(color)),
@@ -96,11 +97,13 @@ pub fn styled_text_to_html(text: &str, style: WriteStyle) -> Html {
 }
 
 /// Web Terminal
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Terminal {
+    history: CommandHistory,
     entries: VecDeque<Html>,
     max_capacity: usize,
     drop_count: usize,
+    is_flushed: bool,
 }
 
 impl Terminal {
@@ -110,9 +113,11 @@ impl Terminal {
     pub fn new(max_capacity: usize, drop_count: usize) -> Option<Self> {
         if drop_count >= 1 && drop_count < max_capacity {
             Some(Self {
+                history: CommandHistory::new(),
                 entries: VecDeque::with_capacity(drop_count),
                 max_capacity,
                 drop_count,
+                is_flushed: false,
             })
         } else {
             None
@@ -140,6 +145,17 @@ impl Terminal {
             false
         }
     }
+
+    fn entry_html(html: Html) -> Html {
+        html! { <li>{html}</li> }
+    }
+
+    /// Get an HTML representation of the `Terminal`.
+    #[inline]
+    pub fn get_html(&self) -> Html {
+        // TODO: can we do this without cloning?
+        html! { <ul class="screen">{for self.entries.iter().cloned().map(Self::entry_html)}</ul> }
+    }
 }
 
 impl Default for Terminal {
@@ -156,14 +172,21 @@ impl Writer for Terminal {
     where
         D: fmt::Display,
     {
-        self.maybe_drop();
-        self.entries
-            .push_back(styled_text_to_html(&display.to_string(), style));
+        let entry = styled_text_to_html(&display.to_string(), style);
+        if self.is_flushed || self.entries.is_empty() {
+            self.is_flushed = false;
+            self.maybe_drop();
+            self.entries.push_back(entry);
+        } else {
+            let last = self.entries.pop_back().unwrap();
+            self.entries.push_back(html! { <>{last}{entry}</> });
+        }
         Ok(self)
     }
 
     #[inline]
     fn done(&mut self) -> WriterDone<Self> {
+        self.is_flushed = true;
         Ok(())
     }
 }
@@ -195,8 +218,12 @@ impl Term for Terminal {
 
     fn clear(&mut self, clear: Clear) -> TermContinue<Self> {
         match clear {
-            Clear::CurrentLine => todo!(),
-            Clear::All => todo!(),
+            Clear::CurrentLine => {
+                // TODO: clear the current command history line
+                // `self.history.current_mut().clear()` like this?
+            }
+            Clear::All => self.entries.clear(),
         }
+        Ok(self)
     }
 }
