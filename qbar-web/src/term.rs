@@ -5,7 +5,7 @@
 
 use {
     core::fmt,
-    qbar_core::{
+    qbar::{
         command::CommandHistory,
         term::{
             Attribute, Clear, Color, Event, Term, TermContinue, TermDone, TermReturn, WriteStyle,

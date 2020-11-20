@@ -5,7 +5,7 @@
 
 use {
     crate::term::Terminal,
-    qbar_core::term::{Term, TermDone, Writer},
+    qbar::term::{Term, TermDone, Writer},
     yew::prelude::*,
 };
 
