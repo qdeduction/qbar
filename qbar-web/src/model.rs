@@ -5,7 +5,10 @@
 
 use {
     crate::term::Terminal,
-    qbar::term::{Term, TermDone, Writer},
+    qbar::{
+        command as cmd,
+        term::{Attribute, TermDone, Writer},
+    },
     yew::prelude::*,
 };
 
@@ -13,7 +16,7 @@ use {
 #[derive(Clone, Debug)]
 pub struct Model {
     link: ComponentLink<Self>,
-    terminal: Terminal,
+    term: Terminal,
     value: String,
     started: bool,
 }
@@ -39,7 +42,7 @@ impl Model {
         if self.started {
             html! {
                 <div class="screen-wrapper flex-reverse">
-                    { self.terminal.get_html() }
+                    { self.term.get_html() }
                 </div>
             }
         } else {
@@ -94,28 +97,23 @@ impl Model {
         }
     }
 
-    /// Clear terminal.
-    pub fn clear(&mut self) {
-        let _ = self.terminal.clear_all();
-    }
-
     /// Run the current active command.
     pub fn run(&mut self) -> TermDone<Terminal> {
-        let cmd = self.value.trim();
-        if !cmd.is_empty() {
-            match cmd {
-                "clear" => self.clear(),
-                "help" | "?" => {
-                    let _ = self.terminal.log_info("help information ...")?.done();
-                }
-                _ => {
-                    let _ = self
-                        .terminal
-                        .log_err(format!("missing command: {}", self.value))?
-                        .done();
-                }
+        self.started = true;
+        self.term
+            .with_attribute("q) ", Attribute::Bold)?
+            .write(&self.value)?
+            .newline()?;
+        let (command, args) = cmd::util::parse_as_command(&self.value);
+        match command {
+            "" => self.term.done()?,
+            "clear" => cmd::clear(&mut self.term, args)?,
+            "help" | "?" => cmd::help(&mut self.term, args)?,
+            "reset" => {
+                cmd::clear(&mut self.term, "")?;
+                self.started = false;
             }
-            self.started = true;
+            _ => cmd::missing(command, &mut self.term, args)?,
         }
         self.value = "".to_owned();
         Ok(())
@@ -127,9 +125,6 @@ impl Model {
 pub enum Msg {
     /// Update the command line
     Update(String),
-
-    /// Clear the screen
-    Clear,
 
     /// Move up in the command history
     Up,
@@ -153,7 +148,7 @@ impl Component for Model {
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         Self {
             link,
-            terminal: Default::default(),
+            term: Default::default(),
             value: Default::default(),
             started: false,
         }
@@ -164,7 +159,6 @@ impl Component for Model {
             Msg::Update(text) => {
                 self.value = text;
             }
-            Msg::Clear => self.clear(),
             Msg::Up => todo!(),
             Msg::Down => todo!(),
             Msg::Run => {

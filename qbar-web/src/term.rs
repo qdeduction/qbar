@@ -18,7 +18,11 @@ use {
 
 /// Convert a string to a `<pre>` element.
 pub fn preformatted(style: &str, text: &str) -> Html {
-    html! { <pre class="entry" style=style>{text}</pre> }
+    if style.trim().is_empty() {
+        html! { <>{text}</> }
+    } else {
+        html! { <span style=style>{text}</span> }
+    }
 }
 
 /// Color to RGB style text.
@@ -147,7 +151,7 @@ impl Terminal {
     }
 
     fn entry_html(html: Html) -> Html {
-        html! { <li>{html}</li> }
+        html! { <li><pre class="entry">{html}</pre></li> }
     }
 
     /// Get an HTML representation of the `Terminal`.

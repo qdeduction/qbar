@@ -81,7 +81,7 @@ footer {
     padding-left: 1em;
     padding-right: 1em;
 }
-ul li {
+li {
     list-style-type: none;
 }
 .entry {
@@ -89,12 +89,15 @@ ul li {
     font-size: 1em;
     margin: 0;
     word-break: break-all;
-    white-space: normal;
+    white-space: break-spaces;
 }
 #command-line {
     width: 100%;
     box-sizing: border-box;
-    padding: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 1em;
+    padding-right: 1em;
     border-style: solid;
     border-color: grey;
     border-radius: 3px;
