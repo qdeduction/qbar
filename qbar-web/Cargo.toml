@@ -10,7 +10,6 @@ publish = false
 crate-type = ["cdylib"]
 
 [dependencies]
-qbar = { path = "../qbar" }
-yew = "0.17"
+qbar = { path = "../qbar", features = ["web"] }
 wasm-bindgen = "0.2"
 wee_alloc = "0.4.5"
