@@ -1,0 +1,249 @@
+(relevance_logics.METADATA 
+    name "Relevance Logics"
+    description "Encoding of the following Relevance Logics: S, T-W, B, DJ, DK, R, NR, E."
+    constants (:= NOT -> AND OR <-> BOX)
+    names (
+        "Unary Relation Substitution"
+            f7b4a0497f5a27068946a1b0cbda031929d47bca621c03aecc5bad9cd56eb8ab
+        "Binary Relation Substitution Left"
+            e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea
+        "Binary Relation Substitution Right"
+            de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659
+        "OR Definition"
+            971dd27343d9d5efe1baf17b4ff4a96c8af1ddb80b73aeee897c05a51da84b9b
+        "<-> Definition"
+            bf7987ed4833f28d7118d3c6f525716ba07e736920ec611b717a2967f788684c
+        ":= Transitivity Left"
+            eb98729424d263496a8c7bb488d63461619164174f0bfc8b1dff911ded0f8db6
+        ":= Transitivity Right"
+            62d41b26c9f1b02bb18cd8104dfb9cecb39409c6ca74065b32689ab25b1e54cf
+        "NOT Substitution"
+            aa0a35cf2f1ffea0022af7befdef2d35b7e28c9329846be08e8498b7dc88af8a
+        "-> Substitution Left"
+            f71a8cf3ff1e66a70b76f5d4c96c6f21d6d2883618f80fa88d95d28883938224
+        "-> Substitution Right"
+            58b26da6656970d4fdf0a7e71176716836cf47cd923372120590af513795161e
+        "AND Substitution Left"
+            15cdb32bb7ad10836c5e7716044d46778e0730aa11ef5e04d86b34f68342cb5b
+        "AND Substitution Right"
+            50c9398f510224e38cff05dbba85275c4255ec74d81e78e1c65ce3955e5af1f5
+        "OR Substitution Left"
+            9a0a7d4ccaa8649a66ee19e35933449186adac7930dadfcb2d3b596d31a8c0ad
+        "OR Substitution Right"
+            749265ce31e6cdfe9b76ef3fda05615d9bb399ef3865126176c214ad504c02cd
+        "<-> Substitution Left"
+            2dc3f207b5b77da5cf717a1d8d20729f7b2358295377e424f723d9c922de4e70
+        "<-> Substitution Right"
+            35775d521eb5f06d2761827057181951e27003f27bd0c4a01adb8f89e30b1dd7
+        "Identity"
+            38ba9e9d9f33c037304eb736b294227ab4784c1c2e291358574812dc4b3ab375
+        "Entailment"
+            89f1b071321d4e83c885f6e442f6d154a1c668eeda17d9b391f7a1bf206fafec
+        "Prefixing"
+            209257045118768ab8811fad40269cca719a50f66ca62e7e4db2247488d2b0c2
+        "Suffixing"
+            a61b1e106458789a4375fc62467ef4447c0d02b4801b06afaf6fc807fb2b4d89
+        "Assertion"
+            2b41f6dc6f47794bb3cc7e2dcffaa384c3b7a5e93ec953b83b2a7a2246a37d4f
+        "Assertion Alternate"
+            c9778fd759e9f0c3ebe6de7524647924bd2c491c744de20b56f19ac85318dd81
+        "Contraction"
+            0408a05bb8e32e75d72d95874ae551eb997cfebdca0e4bbec8bec652582d9a51
+        "Permutation"
+            bc32849ee924296185dfc79240a6788f5fc73b2deabe3dc4d6208dd404786b26
+        "AND Introduction"
+            25970b5ab4ae0d139073996103b00444f06e572dbfdb0b67f9c5a8c18aa5a86c
+        "AND Elimination Left"
+            dbea16912b13d41f0abb6e316f1e82c48388eda3614da4f43ef42c924e3a6798
+        "AND Elimination Right"
+            b5d7fd9dad74724c9b1ded42475533e43970292bf2a5ba843cab6dc9aba9b93a
+        "OR Introduction Left"
+            90e9d3c3586dd18049a73edec39c423a93d66afb7fc84cf0cb9bfd9192bf87bf
+        "OR Introduction Right"
+            a88d68d2a77374753881758c704ed83e78c0d7dfe43852c9f85f15ef432e73f5
+        "OR Elimination Forward"
+            7e5e3debd418661e67b7227f0eda4e1cc902ebbc30f1f17e385c940bcc2c851f
+        "OR Elimination"
+            2a7aebfaec7099ee1aea355e910d5f868452d3d6908a0f39025405d451b96856
+        "Distribution"
+            ff589509038932dfb5fb0bd75ba630f69cd8b235f07da40cbb30a6732896ff67
+        "Double Negation Elimination"
+            818d5d503e8de7551de2e88fe2cdc705c0c868f96472f346c06b8d83c6092ac7
+        "Conjunctive Syllogism"
+            2712d9fe49521ce438dcef1673992f436fa2030c164bd6b6c833565ab61e063c
+        "Law of Excluded Middle"
+            204dfda09d8d96309fd3daf781214b4b93c03eb32f158085a08153f7fd7953f5
+        "Contraposition"
+            22af049b76602d92ac34a7596325c240b056bbfc60f78894f76e53da177834fb
+        "Contraposition Alternate"
+            44b2f0d50bd7f01e60b68565ce4841d1ce96f5a4e13b7e2ee44e2c3257516b6f
+        "Axiom K"
+            01390389265e40d252d6a4111e5a5417adc3fdf3f1cdeaed109908eecf58f194
+        "Axiom K&"
+            94bc30e9da5255b75bb1a3f666188576ce3e92b245c2c77a0ffd570c484f5be0
+        "Modus Ponens"
+            5f1d13c54a54c1bc096c245d839df07394a5cc07fc6c1e7dc2c0212e48e45439
+        "Adjunction"
+            934de9e79f14d01e1e6e6216da48bddbf5c9a13a68e310d7e28cc61b9328dfec
+        "Rule Transitivity"
+            4ba6851137f4c442238c0217145e005d4c0ea7deae5e6d86afd6a23660f5eb10
+        "Rule Prefixing"
+            99a3fe88dbf07960efba234ab5e6d8b919d3439ff15e5b731800e54377073735
+        "Rule Suffixing"
+            08bedebcc3f8c62710b2ee81d15b39da03fad99f3801b5bb2b62513ca2bd0102
+        "Rule Contraposition"
+            956abfe8315303c5153619fd54ecec8b10c46e250d0f628093a2e5a701de0eb5
+        "Rule Contraposition Alternate"
+            351b0932546e061920746ccbaed78b893d1ab32466bbd2aa34cbca0be4e8c323
+        "Necessitation"
+            820fc8e66ce7d72a758351823494765069a0d84bf4169f68437490554d7e691d
+    )
+    systems (
+        S (
+            "Prefixing"
+            "Suffixing"
+            "Rule Transitivity"
+            "Rule Prefixing"
+            "Rule Suffixing"
+        )
+        T-W > S (
+            "Identity"
+        )
+        basic (
+            "NOT Substitution"
+            "-> Substitution Left"
+            "-> Substitution Right"
+            "AND Substitution Left"
+            "AND Substitution Right"
+            "AND Introduction"
+            "AND Elimination Left"
+            "AND Elimination Right"
+            "OR Introduction Left"
+            "OR Introduction Right"
+            "Distribution"
+            "Identity"
+            "Double Negation Elimination"
+            "Modus Ponens"
+        )
+        B > basic (
+            "OR Substitution Left"
+            "OR Substitution Right"
+            "OR Elimination Forward"
+            "Rule Prefixing"
+            "Rule Suffixing"
+            "Rule Contraposition"
+        )
+        DJ > B (
+            "Conjunctive Syllogism"
+        )
+        DK > DJ (
+            "Law of Excluded Middle"
+        )
+        r-basic > basic (
+            ":= Transitivity Left"
+            ":= Transitivity Right"
+            "OR Definition"
+            "OR Elimination"
+            "<-> Definition"
+            "Suffixing"
+            "Contraction"
+            "Contraposition"
+            "Adjunction"
+        )
+        R > r-basic (
+            "Assertion"
+        )
+        NR > R (
+            "Axiom K"
+            "Axiom K&"
+            "Necessitation"
+        )
+        E > r-basic (
+            "Entailment"
+        )
+    )
+)
+
+(((A := B) (r B)) ((r A)))
+(f7b4a0497f5a27068946a1b0cbda031929d47bca621c03aecc5bad9cd56eb8ab (r NOT))
+
+(((A := B) (B r C)) ((A r C)))
+(e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea (r  :=))
+(e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea (r  ->))
+(e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea (r AND))
+(e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea (r  OR))
+(e3e1c92c0c80fc44d0f4e3f91823394e948b451ca2ba6b6f93adba5970ccb2ea (r <->))
+
+(((A := B) (C r B)) ((C r A)))
+(de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659 (r  :=))
+(de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659 (r  ->))
+(de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659 (r AND))
+(de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659 (r  OR))
+(de3ac7552398b0a693a77c2d34e57d94724886662e1d9838e6436caeb2a7f659 (r <->))
+
+(() ((A -> A)))
+
+(() (((A AND B) -> A)))
+
+(() (((A AND B) -> B)))
+
+(() ((((A -> B) AND (A -> C)) -> (A -> (B AND C)))))
+
+(() ((A -> (A OR B))))
+
+(() ((B -> (A OR B))))
+
+(() ((((A -> C) AND (B -> C)) -> ((A OR B) -> C))))
+
+(() ((((A -> C) AND (B -> C)) <-> ((A OR B) -> C))))
+
+(() (((A AND (B OR C)) -> ((A AND B) OR (A AND C)))))
+
+(() (((NOT (NOT A)) -> A)))
+
+(() (((A -> (NOT B)) -> (B -> (NOT A)))))
+
+(() (((A -> B) -> ((NOT B) -> (NOT A)))))
+
+(() ((((A -> B) AND (B -> C)) -> (A -> C))))
+
+(() (((A -> B) -> ((B -> C) -> (A -> C)))))
+
+(() (((A -> B) -> ((C -> A) -> (C -> B)))))
+
+(() (((A -> (A -> B)) -> (A -> B))))
+
+(() (((A AND (A -> B)) -> B)))
+
+(() (((A -> (B -> C)) -> (B -> (A -> C)))))
+
+(() ((A -> ((A -> B) -> B))))
+
+(() ((((A -> A) -> B) -> B)))
+
+(() ((A OR (NOT A))))
+
+(() (((A OR B) := (NOT ((NOT A) AND (NOT B))))))
+
+(() (((A <-> B) := ((A -> B) AND (B -> A)))))
+
+(() (((BOX (A -> B)) -> ((BOX A) -> (BOX B)))))
+
+(() ((((BOX A) AND (BOX B)) -> (BOX (A AND B)))))
+
+(((A -> B) A) (B))
+
+((A B) ((A AND B)))
+
+(((A -> B)) (((C -> A) -> (C -> B))))
+
+(((A -> B)) (((B -> C) -> (A -> C))))
+
+(((A -> B)) (((NOT B) -> (NOT A))))
+
+(((A -> (NOT B))) ((B -> (NOT A))))
+
+(((A -> B) (B -> C)) ((A -> C)))
+
+((A) ((BOX A)))
+
