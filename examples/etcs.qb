@@ -1,0 +1,258 @@
+(etcs.METADATA
+    name "Elementary Theory of the Category of Sets"
+    description "Encoding of ETCS with explicit substitution without base logic (except implication)."
+    constants (~ var const = -> < > <> !> * <!*!> pow powL powR pow! jointly_monic choice zero succ rec)
+)
+
+(((x = y) (x = z)) ((y = z)))
+(((x = y) (z = x)) ((z = y)))
+(((x = y) (x -> z)) ((y -> z)))
+(((x = y) (z -> x)) ((z -> y)))
+
+(((x = y)) (((const x) = (const y))))
+(((x = y)) (((< x) = (< y))))
+(((x = y)) (((x >) = (y >))))
+(((x = y)) (((x <> z) = (y <> z))))
+(((x = y)) (((z <> x) = (z <> y))))
+(((x = y)) (((x !>) = (y !>))))
+(((x = y)) (((x * z) = (y * z))))
+(((x = y)) (((z * x) = (z * y))))
+(((x = y)) (((x <!*!> z) = (y <!*!> z))))
+(((x = y)) (((z <!*!> x) = (z <!*!> y))))
+(((x = y)) (((pow x) = (pow y))))
+(((x = y)) (((powL x) = (powL y))))
+(((x = y)) (((powR x) = (powR y))))
+(((x = y)) (((pow! x) = (pow! y))))
+(((x = y)) (((choice x) = (choice y))))
+(((x = y)) (((rec x z) = (rec y z))))
+(((x = y)) (((rec z x) = (rec z y))))
+
+((
+
+)(
+    (x = x)
+))
+
+((
+    P
+)(
+    (P ~ x)
+))
+
+((
+
+)(
+    ((var ~ x) = x)
+))
+
+((
+
+)(
+    (((const c) ~ x) = c)
+))
+
+((
+
+)(
+    ((< (< f)) = (< f))
+))
+
+((
+
+)(
+    (((< f) >) = (< f))
+))
+
+((
+
+)(
+    ((< (f >)) = (f >))
+))
+
+((
+
+)(
+    (((f >) >) = (f >))
+))
+
+((
+
+)(
+    ((< (f <> g)) = (< f))
+))
+
+((
+
+)(
+    (((f <> g) >) = (g >))
+))
+
+((
+
+)(
+    (((< f) <> f) = f)
+))
+
+((
+
+)(
+    ((f <> (f >)) = f)
+))
+
+((
+    ((f >) = (< g))
+    ((g >) = (< h))
+)(
+    (((f <> g) <> h) = (f <> (g <> h)))
+))
+
+((
+
+)(
+    ((< (f !>)) = (< f))
+))
+
+((
+
+)(
+    (((f !>) >) = ((g !>) >))
+))
+
+((
+    ((< f) = (< g))
+    (((f !>) >) = (g >))
+)(
+    ((f !>) = g)
+))
+
+((
+    ((f >) = (g >))
+)(
+    (((g * f) <> f) = ((f * g) <> g))
+))
+
+((
+
+)(
+    ((< (g * f)) = (< (f * g)))
+))
+
+((
+    ((F <> f) = (G <> g))
+)(
+    (((F <!*!> G) <> (g * f)) = F)
+    (((F <!*!> G) <> (f * g)) = G)
+))
+
+((
+    ((F <> f) = (G <> g))
+    ((U <> (g * f)) = F)
+    ((U <> (f * g)) = G)
+)(
+    ((F <!*!> G) = U)
+))
+
+((
+    (((var <> (const (const f))) = ((const var) <> (const (const f)))) -> (((var <> (const (const g))) = ((const var) <> (const (const g)))) -> (var = (const var))))
+)(
+    (jointly_monic f g)
+))
+
+((
+    (jointly_monic f g)
+)(
+    (((var <> (const (const f))) = ((const var) <> (const (const f)))) -> (((var <> (const (const g))) = ((const var) <> (const (const g)))) -> (var = (const var))))
+))
+
+((
+
+)(
+    ((pow (f >)) = (pow f))
+))
+
+((
+
+)(
+    (((pow f) >) = (pow f))
+))
+
+((
+
+)(
+    (((powL f) >) = (pow f))
+))
+
+((
+
+)(
+    (((powR f) >) = (f >))
+))
+
+((
+
+)(
+    (jointly_monic (powL f) (powR f))
+))
+
+((
+    (jointly_monic f g)
+)(
+    (((powL f) * (pow! f g)) = g)
+    ((((pow! f g) * (powL f)) <> (powR f)) = f)
+    ((((powL f) * (pow! f g)) <> (pow! f g)) = (((pow! f g) * (powL f)) <> (powL f)))
+))
+
+((
+    (jointly_monic f g)
+    (((powL f) * U) = g)
+    (((U * (powL f)) <> (powR f)) = f)
+    ((((powL f) * U) <> U) = ((U * (powL f)) <> (powL f)))
+)(
+    ((pow! f g) = U)
+))
+
+((
+
+)(
+    (((< var) = ((var !>) >)) -> (((var <> (const f)) = (var <> (const g))) -> (f = g)))
+))
+
+((
+    ((((const (const f)) <> var) = ((const (const f)) <> (const var))) -> (var = (const var)))
+)(
+    (((choice f) <> f) = (f >))
+))
+
+((
+
+)(
+    ((< zero) = ((zero !>) >))
+))
+
+((
+
+)(
+    ((< succ) = (succ >))
+))
+
+((
+
+)(
+    ((zero >) = (< succ))
+))
+
+((
+    ((< z) = ((z !>) >))
+    ((< s) = (s >))
+    ((z >) = (< z))
+)(
+    ((zero <> (rec z s)) = z)
+    ((succ <> (rec z s)) = (rec z s) <> s)
+))
+
+((
+    ((zero <> f) = (zero <> g))
+    ((succ <> f) = (succ <> g))
+)(
+    (f = g)
+))
