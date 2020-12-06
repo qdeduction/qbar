@@ -1,0 +1,101 @@
+(leibniz_equality.METADATA
+    name "Leibniz Equality"
+    description "Encoding of a Leibniz equality relation."
+    constants (var const ~ =)
+    names (
+        "Reflexivity"
+            b88149b67e08548382e1ae38b1311d86de5e842a7218ced289ff91bd127c56d9
+        "Indiscernibility of Identicals"
+            d5b0c962f56c6f9bdbb1686b5e982f3fcd25e25ab59add09b988f28f752e9fee
+        "Equality Substitution Forward"
+            b7121cade82114d3ad2b8b0d451c6567e2eff06ca646355320bbf18350c45b1c
+        "Equality Substitution Reverse"
+            ad84ff1ace86f730def9e0cfc7ea4887054e7465a44a8e344e5624490a952493
+        "Left Equality Variable Substitution Forward"
+            a10f4fb20eb22d4688afd1acf6f18558d2869aef8085c399d576f5e044fe690d
+        "Left Equality Variable Substitution Reverse"
+            9cfd5b79d8f151655db0b9f6447b69a794fd955b129d8bbebf04139ae907afe9
+        "Right Equality Constant Substitution Forward"
+            02fab4a4fb950a4ba9b886f5b77ac9b187c6a1b2fa6947e132de48557baf4e82
+        "Right Equality Constant Substitution Reverse"
+            09fb17c9f6846c4408093b80993b39b169690755d4203f64b3eda16d47bf7d54
+        "Symmetry" (
+            ae9a1e6c3723ef17560fb12953a67178a662134116d5b8536a752a2e332ca6fa
+            bb081cdd8a474aefc0d0e2b1322b3f917cb8e0c52e5b1e149a19ff25946b5f04
+        )
+        "Transitivity" (
+            bf69dc2888ee2bf33a5e5d1bbe22c5f64f983edee991a22b1d81019235e6ad98
+            5206d7d7cc32f375ef12d120f13e43c3068296efd7effeec00fb73f44f4bd011
+        )
+    )
+)
+
+((
+
+)(
+    (x = x)
+))
+
+((
+    (x = y) (P ~ x)
+)(
+    (P ~ y)
+))
+
+((
+    ((a = b) ~ x)
+)(
+    ((a ~ x) = (b ~ x))
+))
+
+((
+    ((a ~ x) = (b ~ x))
+)(
+    ((a = b) ~ x)
+))
+
+((
+    ((var ~ x) = y)
+)(
+    (x = y)
+))
+
+((
+    (x = y)
+)(
+    ((var ~ x) = y)
+))
+
+((
+    (x = ((const c) ~ y))
+)(
+    (x = c)
+))
+
+((
+    (x = c)
+)(
+    (x = ((const c) ~ y))
+))
+
+(
+    b88149b67e08548 ()
+    09fb17c9f6846c4 (c x y x)
+    9cfd5b79d8f1516 (y ((const x) ~ x))
+    ad84ff1ace86f73 (a var b (const x))
+    d5b0c962f56c6f9 (P (var = (const x)))
+    b7121cade82114d (x y a var b (const x))
+    02fab4a4fb950a4 (x (var ~ y) c x)
+    a10f4fb20eb22d4 (x y y x)
+)
+
+(
+    ae9a1e6c3723ef1 ()
+    09fb17c9f6846c4 (c z x y)
+    9cfd5b79d8f1516 (x y y ((const z) ~ y))
+    ad84ff1ace86f73 (x y a var b (const z))
+    d5b0c962f56c6f9 (x y y x P (var = (const z)))
+    b7121cade82114d (a var b (const z))
+    02fab4a4fb950a4 (c z y x x (var ~ x))
+    a10f4fb20eb22d4 (y z)
+)
