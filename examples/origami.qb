@@ -1,0 +1,196 @@
+(origami.METADATA
+    name "Origami"
+    description "Encoding of origami based on the Justin-Huzita-Hatori Axioms."
+    constants (point line on fold join swap vert add)
+    names (
+        "JHH Axiom 1"
+            9f344b15c18f0a94cfd6ee222fa8883dbdd7ae0dd8e6dc387dcbc62c1deec31e
+        "JHH Axiom 2"
+            eaec303d701e2bb368605a4f071a61e6dc57c0c1df71171dfe3bbe3aaa8423e9
+        "JHH Axiom 3"
+            fa62e1c930578b947511bdbe7b39b9b10db135a18b95f8fec6d2e50111d688af
+        "JHH Axiom 4"
+            af2ff937a285e99220156b9d3a8085b7d52f82802876d8cce0f1234d811c58a9
+        "JHH Axiom 5"
+            62dd6314fe57a2f6cf98ded81bef3d4ebc5cfe94c998c696b62f52010b0a70d4
+        "JHH Axiom 6"
+            887151d1a0206de5fa21a782cdcd0c4562df5fd27d595482706045306cf82d1e
+        "JHH Axiom 7"
+            78cd53a23cdd5b8e17fa83308639d1d72e3b182cb98a99c640aa4642605493b2
+        "Incidence Reflexivity"
+            0bde4c39a25556528da6b80009022ffd0ac09454b21b83216838ec072eef37ed
+        "Incidence Transitivity"
+            d3af4cbde022ccde7ac99ab57c2a72de238e83781a466fc65cbd9301eb561911
+        "Incidence Symmetry Points"
+            209b08bd468f001d33c427dd09a919770e5f95a1c3baa1d3c2583cbc90d82548
+        "Incidence Symmetry Lines"
+            813e5e13a13bb53b7b780b659107737834cbbc144e875e7f9d837d65c82879c6
+        "Points Fold to Points"
+            88b48b25e909a98e12f00f6a6b8244a9882bfa701c8830ace01ffcd310ef6a88
+        "Lines Fold to Lines"
+            2c34c210419215405008087f0f75b5cd421b0471fca06df87968f96722c9d5e2
+        "Fold Preserves Incidence Forward"
+            d3006314b7af59a190503280ee2770d1028c0d4da41d5072db895e8294ee6748
+        "Fold Preserves Incidence Reverse"
+            155b843c87c1e3a3ec36b192c9bd0224724e90d4484655c93a2c323eded8c4c7
+        "Fold Symmetry Forward"
+            2e9353679a9de4aea46ad4e78cac21faedf80232a5efb3d5601f83b604ec4cc3
+        "Fold Symmetry Reverse"
+            997e6a73acff7cb1417c378c37b580cf3c7b98ea9807004698a3a41473129ad4
+        "Incident Folds are Same Fold"
+            7c0826461547500e051291c4033d57a0d65d51bc105ee524349a399d1d29bf2d
+        "Fold Fixes Self-Incidences"
+            d2f0adb949d02285974e6d8460955311d4b6584f97900ebbc6a2e3ea067e2328
+    )
+)
+
+((
+    (point p)
+    (point q)
+)(
+    (line (join p q))
+    (p on (join p q))
+    (q on (join p q))
+))
+
+((
+    (point p)
+    (point q)
+)(
+    (line (swap p q))
+    (q on (fold (swap p q) p))
+    (p on (fold (swap p q) q))
+))
+
+((
+    (line m)
+    (line n)
+)(
+    (line (swap m n))
+    (n on (fold (swap m n) m))
+    (m on (fold (swap m n) n))
+))
+
+((
+    (point p)
+    (line m)
+)(
+    (line (vert p m))
+    (p on (fold (vert p m) p))
+    (m on (fold (vert p m) m))
+))
+
+((
+    (point b)
+    (point p)
+    (line m)
+)(
+    (line (add b p m))
+    (b on (add b p m))
+    (p on (fold (add b p m) m))
+))
+
+((
+    (point p)
+    (point q)
+    (line m)
+    (line n)
+)(
+    (line (add p m q n))
+    (p on (fold (add p m q n) m))
+    (q on (fold (add p m q n) n))
+))
+
+((
+    (line b)
+    (point p)
+    (line m)
+)(
+    (line (add b p m))
+    (b on (fold (add b p m) b))
+    (p on (fold (add b p m) m))
+))
+
+((
+
+)(
+    (x on x)
+))
+
+((
+    (x on y)
+    (y on z)
+)(
+    (x on z)
+))
+
+((
+    (point p)
+    (point q)
+    (p on q)
+)(
+    (q on p)
+))
+
+((
+    (line m)
+    (line n)
+    (m on n)
+)(
+    (n on m)
+))
+
+((
+    (point b)
+    (line F)
+)(
+    (point (fold F b))
+))
+
+((
+    (line b)
+    (line F)
+)(
+    (line (fold F b))
+))
+
+((
+    (x on y)
+)(
+    ((fold F x) on (fold F y))
+))
+
+((
+    ((fold F x) on (fold F y))
+)(
+    (x on y)
+))
+
+((
+    (x on (fold F y))
+)(
+    ((fold F x) on y)
+))
+
+((
+    ((fold F x) on y)
+)(
+    (x on (fold F y))
+))
+
+((
+    (F on G)
+)(
+    ((fold F x) on (fold G x))
+))
+
+((
+    (x on F)
+)(
+    (x on (fold F x))
+))
+
+(
+    0bde4c39a255565 (x (fold F x))
+    2e9353679a9de4a (x (fold F x) y x)
+)
