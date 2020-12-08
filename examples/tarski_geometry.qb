@@ -1,0 +1,44 @@
+(tarski_geometry.METADATA
+    name "Tarski's Axioms of Geometry"
+    description "Encoding of the Tarski Axioms of geometry."
+    constants (= cong bet pasch seg)
+)
+
+((
+
+)(
+    (cong x y y x)
+))
+
+((
+    (cong x y z z)
+)(
+    (x = y)
+))
+
+((
+    (cong x y z u) (cong x y v w)
+)(
+    (cong z u v w)
+))
+
+((
+    (bet x y x)
+)(
+    (x = y)
+))
+
+((
+    (bet x u z)
+    (bet y v z)
+)(
+    (bet u (pasch x y u v z) y)
+    (bet v (pasch x y u v z) x)
+))
+
+((
+
+)(
+    (bet x y (seg x y a b))
+    (cong y (seg x y a b) a b)
+))

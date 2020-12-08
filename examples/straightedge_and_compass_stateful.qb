@@ -1,0 +1,150 @@
+(straightedge_and_compass_stateful.METADATA
+    name "Stateful Straightedge and Compass"
+    description "WIP"
+    constants (0 1 ! ? - | = pasch extend cross alignF alignB)
+)
+
+((
+
+)(
+    (! 0)
+))
+
+((
+
+)(
+    (! 1)
+))
+
+((
+    (? p)
+    (? p)
+)(
+    (? p)
+))
+
+((
+    (? p)
+    (! p)
+)(
+    (! p)
+))
+
+((
+    (! a)
+    (! b)
+)(
+    (! a)
+    (! b)
+    (a - a - b)
+))
+
+((
+    (! a)
+    (! b)
+)(
+    (! a)
+    (! b)
+    (a - b - b)
+))
+
+((
+    (a - p - b)
+)(
+    (b - p - a)
+))
+
+((
+    (a - b - z)
+    (c - d - z)
+)(
+    (? (pasch a b c d z))
+    (b - (pasch a b c d z) - c)
+    (d - (pasch a b c d z) - a)
+))
+
+((
+    (p | a - b)
+)(
+    (b - a | p)
+))
+
+((
+    (b - a | p)
+)(
+    (p | a - b)
+))
+
+((
+    (a | b - c)
+)(
+    (b | c - a)
+))
+
+((
+    (! a)
+    (! b)
+)(
+    (! a)
+    (! b)
+    (a - b = b - a)
+))
+
+((
+    (a - b = c - d)
+    (a - b = e - f)
+)(
+    (c - d = e - f)
+))
+
+((
+    (! a)
+    (! b)
+    (! x)
+    (! y)
+)(
+    (! a)
+    (! b)
+    (! x)
+    (! y)
+    (? (extend x y a b))
+    (y - x - (extend x y a b))
+    (x - (extend x y a b) = a - b)
+))
+
+((
+    (x - y - w)
+    (x - y = y - w)
+    (x - u - v)
+    (x - u = u - v)
+    (y - u - z)
+    (y - u = z - u)
+)(
+    (y - z = v - w)
+))
+
+((
+    (c | a - b)
+    (a - b | d)
+    (b | c - d)
+    (c - d | a)
+)(
+    (? (cross a b c d))
+    (a - (cross a b c d) - b)
+    (c - (cross a b c d) - d)
+))
+
+((
+    (! a)
+    (! b)
+    (c - a - d)
+)(
+    (! a)
+    (! b)
+    (? (alignF a b c d))
+    (? (alignB a b c d))
+    (c - (alignF a b c d) = c - d)
+    (c - (alignB a b c d) = c - d)
+    ((alignB a b c d) - a - b)
+    ((alignB a b c d) - a - (alignF a b c d))
+))
