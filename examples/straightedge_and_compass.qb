@@ -1,7 +1,7 @@
 (straightedge_and_compass.METADATA
     name "Straightedge and Compass"
     description "WIP"
-    constants (0 1 # - | = extend cross alignF alignR)
+    constants (0 1 # - | = cross alignF alignB circL circR)
     names ()
 )
 
@@ -9,6 +9,12 @@
 
 )(
     (0 # 1)
+))
+
+((
+    (a # b)
+)(
+    (b # a)
 ))
 
 ((
@@ -87,21 +93,6 @@
 ))
 
 ((
-    (a # b)
-    (x # y)
-)(
-    (y - x - (extend x y a b))
-    (x - (extend x y a b) = a - b)
-))
-
-((
-    (x # y)
-    (y # w)
-    (x # u)
-    (u # v)
-    (y # u)
-    (u # z)
-    (y # z)
     (v # w)
     (x - y - w)
     (x - y = y - w)
@@ -133,7 +124,33 @@
     (c - a - d)
 )(
     (c - (alignF a b c d) = c - d)
-    (c - (alignR a b c d) = c - d)
-    ((alignR a b c d) - a - b)
-    ((alignR a b c d) - a - (alignF a b c d))
+    (c - (alignB a b c d) = c - d)
+    ((alignB a b c d) - a - b)
+    ((alignB a b c d) - a - (alignF a b c d))
 ))
+
+((
+    (a # b)
+    (c # d)
+    (a # c)
+    (a - (alignF c a c d) - (alignF a c a b))
+    ((alignF c a c d) - (alignF a c a b) - c)
+)(
+    (a - (circL a b c d) = a - b)
+    (c - (circL a b c d) = c - d)
+    (c - (circR a b c d) = c - d)
+    (a - (circR a b c d) = a - b)
+))
+
+(
+    6acc87047103212 ()
+    6acc87047103212 ()
+    6acc87047103212 ()
+    6acc87047103212 ()
+    6acc87047103212 ()
+    6acc87047103212 ()
+    989a008c80bce22 (a 0 b 1)
+    4e4d5510bdbdaf1 (a 0 b 1)
+    cc4273933463ca7 (a 0 b 1 c 0 d 1)
+    9fff356ddd40643 (a 0 b 1 c 1 d 0)
+)
