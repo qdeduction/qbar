@@ -1,0 +1,94 @@
+(pierce_law.METADATA
+    name "Pierce's Law"
+    description "Minimal Hilbert Style Axiom System for Deriving Pierce's Law."
+    constants (=> 0)
+    names (
+        axioms (
+            "Left Projection"
+                769fa8d074a4f4af161c8cba86ee1515e6eadc2baa9025987055bb98c7eca5e7
+            "Continuation Application"
+                e829e3d7fb977a0a9f9ca253895da942ee971a334b496d47ede4869ec9450b95
+            "Double Negation Elimination"
+                659da455ac4cab2240c9e0f041dbd641b895c705ab78f10ea0d7630e7dd82963
+        )
+        rules (
+            "Modus Ponens"
+                e0852b72e4d71cbcba4854cb0aeda0bd57d13e9a79ef3c25333f3472497f178e
+        )
+        theorems (
+            "Principle of Explosion"
+                355b5829604e5d681a2db17b00eac076972b0f39f064b8357f595eccbf6ef4b4
+            "Principle of Explosion from given contradiction"
+                71caa085c2af31eb1169b41c823a0da8231dfa9a3872243af2b69dd59f1e78f4
+            "Pierce's Law"
+                ...
+        )
+    )
+    extra (
+        769fa8d074a4f4a (x x y y)
+        e829e3d7fb977a0 (x x y y z z)
+        659da455ac4cab2 (x x)
+        e0852b72e4d71cb (x x y y)
+    )
+)
+
+((
+    
+)(
+    (x => (y => x))
+))
+
+((
+
+)(
+    ((x => (y => z)) => ((x => y) => (x => z)))
+))
+
+((
+
+)(
+    (((x => 0) => 0) => x)
+))
+
+((
+    (x => y)
+    x
+)(
+    y
+))
+
+(
+    659da455ac4cab2 ()
+    769fa8d074a4f4a (x (((x => 0) => 0) => x) y 0)
+    e0852b72e4d71cb (x (((x => 0) => 0) => x) y (0 => (((x => 0) => 0) => x)))
+    e829e3d7fb977a0 (x 0 y ((x => 0) => 0) z x)
+    e0852b72e4d71cb (x (0 => (((x => 0) => 0) => x)) y ((0 => ((x => 0) => 0)) => (0 => x)))
+    769fa8d074a4f4a (x 0 y (x => 0))
+    e0852b72e4d71cb (x (0 => ((x => 0) => 0)) y (0 => x))
+)
+
+(
+    355b5829604e5d6 (x y)
+    769fa8d074a4f4a (x (0 => y) y x)
+    e0852b72e4d71cb (x (0 => y) y (x => (0 => y)))
+    e829e3d7fb977a0 (y 0 z y)
+    e0852b72e4d71cb (x (x => (0 => y)) y ((x => 0) => (x => y)))
+)
+
+(
+    71caa085c2af31e (x p y q)
+    769fa8d074a4f4a (x ((p => q) => p) y (p => 0))
+    e829e3d7fb977a0 (x (p => 0) y (p => q) z p)
+    769fa8d074a4f4a (x (((p => 0) => ((p => q) => p)) => (((p => 0) => (p => q)) => ((p => 0) => p))) y ((p => q) => p))
+    e0852b72e4d71cb (x (((p => 0) => ((p => q) => p)) => (((p => 0) => (p => q)) => ((p => 0) => p))) y (((p => q) => p) => (((p => 0) => ((p => q) => p)) => (((p => 0) => (p => q)) => ((p => 0) => p)))))
+    e829e3d7fb977a0 (x ((p => q) => p) y ((p => 0) => ((p => q) => p)) z (((p => 0) => (p => q)) => ((p => 0) => p)))
+    e0852b72e4d71cb (x (((p => q) => p) => (((p => 0) => ((p => q) => p)) => (((p => 0) => (p => q)) => ((p => 0) => p)))) y ((((p => q) => p) => ((p => 0) => ((p => q) => p))) => (((p => q) => p) => (((p => 0) => (p => q)) => ((p => 0) => p)))))
+    e0852b72e4d71cb (x (((p => q) => p) => ((p => 0) => ((p => q) => p))) y (((p => q) => p) => (((p => 0) => (p => q)) => ((p => 0) => p))))
+    e829e3d7fb977a0 (x ((p => q) => p) y ((p => 0) => (p => q)) z ((p => 0) => p))
+    e0852b72e4d71cb (x (((p => q) => p) => (((p => 0) => (p => q)) => ((p => 0) => p))) y ((((p => q) => p) => ((p => 0) => (p => q))) => (((p => q) => p) => ((p => 0) => p))))
+    769fa8d074a4f4a (x ((p => 0) => (p => q)) y ((p => q) => p))
+    769fa8d074a4f4a (x ((((p => q) => p) => ((p => 0) => (p => q))) => (((p => q) => p) => ((p => 0) => p))) y ((p => 0) => (p => q)))
+    e0852b72e4d71cb (x ((((p => q) => p) => ((p => 0) => (p => q))) => (((p => q) => p) => ((p => 0) => p))) y (((p => 0) => (p => q)) => ((((p => q) => p) => ((p => 0) => (p => q))) => (((p => q) => p) => ((p => 0) => p)))))
+
+)
+
