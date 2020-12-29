@@ -1,0 +1,223 @@
+(computational_type_theory.METADATA
+    name "Computational Type Theory"
+    description "Encoding of Computational Type Theory from Angiuli's Thesis: Computational Semantics of Cartesian Cubical Type Theory."
+    constants (
+        ↦
+        ↦*
+        ⇓
+        val
+        subst
+        →
+        λ
+        app
+        ×
+        pair
+        fst
+        snd
+        Eq
+        ★
+        nat
+        z
+        s
+        natrec
+        bool
+        true
+        false
+        if
+        void
+        Prop
+        Type
+        ∈
+        >>
+    )
+    names ()
+)
+
+((
+
+)(
+    (M ↦* M)
+))
+
+((
+    (M ↦ M')
+    (M' ↦* N')
+)(
+    (M ↦* N')
+))
+
+((
+    (M ↦* M0)
+    (M0 val)
+)(
+    (M ⇓ M0)
+))
+
+((
+    (M ⇓ M0)
+)(
+    (M ↦* M0)
+    (M0 val)
+))
+
+((
+
+)(
+    ((A → B) val)
+))
+
+((
+
+)(
+    ((λ M) val)
+))
+
+((
+    (M ↦ M')
+)(
+    ((app M N) ↦ (app M' N))
+))
+
+((
+
+)(
+    ((app (λ M) N) ↦ (subst M N))
+))
+
+((
+
+)(
+    ((A × B) val)
+))
+
+((
+
+)(
+    ((pair M N) val)
+))
+
+((
+    (M ↦ M')
+)(
+    ((fst M) ↦ (fst M'))
+))
+
+((
+    (M ↦ M')
+)(
+    ((snd M) ↦ (snd M'))
+))
+
+((
+
+)(
+    ((fst (pair M N)) ↦ M)
+))
+
+((
+
+)(
+    ((snd (pair M N)) ↦ N)
+))
+
+((
+
+)(
+    ((Eq A M N) val)
+))
+
+((
+
+)(
+    (★ val)
+))
+
+((
+
+)(
+    (nat val)
+))
+
+((
+
+)(
+    (z val)
+))
+
+((
+
+)(
+    ((s M) val)
+))
+
+((
+    (M ↦ M')
+)(
+    ((natrec M Z S) ↦ (natrec M' Z S))
+))
+
+((
+
+)(
+    ((natrec z Z S) ↦ Z)
+))
+
+((
+
+)(
+    ((natrec (s M) Z S) ↦ (subst (subst S M) (natrec M Z S)))
+))
+
+((
+
+)(
+    (bool val)
+))
+
+((
+
+)(
+    (true val)
+))
+
+((
+
+)(
+    (false val)
+))
+
+((
+    (M ↦ M')
+)(
+    ((if M T F) ↦ (if M' T F))
+))
+
+((
+
+)(
+    ((if true T F) ↦ T)
+))
+
+((
+
+)(
+    ((if false T F) ↦ F)
+))
+
+((
+
+)(
+    (void val)
+))
+
+((
+
+)(
+    ((Prop i) val)
+))
+
+((
+
+)(
+    ((Type i) val)
+))
