@@ -1,0 +1,130 @@
+(sup_calculus.METADATA
+    name "⊙-Calculus"
+    description "Fragment of the Sup-Calculus from 'A New Connective in Natural Deduction, and its Application to Quantum Computing' (arxiv.org/abs/2012.08994)."
+    constants (↦ : ⊢ scalar 1 . + ‖ ⊙ elim B Q)
+    names (
+        "Scalar Unit"
+            26c99fb1de1bf66f8aa9a97f06ee4a98d0da1f2f27a5967426093eed4e502b4c
+        "Scalar Sum"
+            7d3e867c2ea652b8362afa1eae49ade6193d9c4640bf787aae1794ffac6888d2
+        "Scalar Multiply"
+            43cca952167ee6975a8fff1cc971c640a564164d3970da1c8443bee649b636f0
+        "Weight Introduction"
+            30ef11581ef73b05a0c0e0b32ce27c1d142111ae182b8485f42346968d974d76
+        "Parallel"
+            320aaecd482d71b6f6863a650650785ead38091673d9f8a47ccecaa5f5cf50a5
+        "Weighted Parallel"
+            f492584c8c4807e06a03b259657de3445dd5c9f257643e1e3b7f5c28ee51ef58
+        "Sup Introduction"
+            8eae99a69c4473cf54b7c156eaa46d13dfc52292a9d07d16bbce737ccf666fd0
+        "Weighted Sup Introduction"
+            777dcfc8bfa4e3688bd562bcd869ee396caabddb90699db3a1e4f13f4067039c
+        "Sup Elimination"
+            ...
+        "Sup Parallel Elimination"
+            ...
+    )
+)
+
+((
+
+)(
+    (scalar 1)
+))
+
+((
+    (scalar a)
+    (scalar b)
+)(
+    (scalar (a + b))
+))
+
+((
+    (scalar a)
+    (scalar b)
+)(
+    (scalar (a . b))
+))
+
+((
+    (scalar w)
+    (Γ ⊢ t : T)
+)(
+    (Γ ⊢ (w . t) : T)
+))
+
+((
+    (Γ ⊢ l : A)
+    (Γ ⊢ r : A)
+)(
+    (Γ ⊢ (l ‖ r) : A)
+))
+
+((
+    (Γ ⊢ (wl . l) : A)
+    (Γ ⊢ (wr . r) : A)
+)(
+    (Γ ⊢ ((wl . l) ‖ (wr . r)) : A)
+))
+
+((
+    (Γ ⊢ a : A)
+    (Γ ⊢ b : B)
+)(
+    (Γ ⊢ (a + b) : (A ⊙ B))
+))
+
+((
+    (Γ ⊢ (wa . a) : A)
+    (Γ ⊢ (wb . b) : B)
+)(
+    (Γ ⊢ ((wa . a) + (wb . b)) : (A ⊙ B))
+))
+
+((
+    ((Γ A) ⊢ l : C)
+    ((Γ B) ⊢ r : C)
+    (Γ ⊢ t : (A ⊙ B))
+)(
+    (Γ ⊢ (elim ⊙ l r t) : C)
+))
+
+((
+    ((Γ A) ⊢ l : C)
+    ((Γ B) ⊢ r : C)
+    (Γ ⊢ t : (A ⊙ B))
+)(
+    (Γ ⊢ (elim ⊙ ‖ l r t) : C)
+))
+
+((
+
+)(
+    ((a . ((b.t) ‖ (c.t))) ↦ ((a . (b + c)) . t))
+))
+
+((
+
+)(
+    ((a . (((c . t) + (d . u)) ‖ (b . ((e . v) + (f . w)))))
+        ↦ ((1 . (((a . c) . t) ‖ ((b . e) . v))) + (1 . (((a . d) . u) ‖ ((b . f) . w)))))
+))
+
+((
+
+)(
+    ((elim ⊙ ((a . t) + (b . u)) [x]v [y]w) ↦ ((t/x)v))
+))
+
+((
+
+)(
+    ((elim ⊙ ((a . t) + (b . u)) [x]v [y]w) ↦ ((u/y)w))
+))
+
+((
+
+)(
+    ((elim ⊙ ‖ ((a . t) + (b . u)) [x]v [y]w) ↦ ((a . ((t/x)v)) ‖ (b . ((u/y)w))))
+))
+
