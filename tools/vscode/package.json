@@ -1,0 +1,73 @@
+{
+    "name": "qbar",
+    "displayName": "qbar",
+    "description": "the rational proof assistant",
+    "icon": "assets/icon.png",
+    "author": "Brandon H. Gomes",
+    "publisher": "bhgomes",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/qdeduction/qbar"
+    },
+    "engines": {
+        "vscode": "^1.51.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:qbar"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "qbar",
+                "aliases": [
+                    "qbar",
+                    "qb"
+                ],
+                "extensions": [
+                    ".qb"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "qbar",
+                "scopeName": "source.qbar",
+                "path": "./syntaxes/qbar.tmLanguage.json"
+            }
+        ],
+        "configuration": {
+            "title": "qbar",
+            "properties": {}
+        },
+        "commands": []
+    },
+    "dependencies": {
+        "vscode-languageclient": "^7.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.22",
+        "@types/vscode": "^1.51.0",
+        "ts-loader": "^8.0.14",
+        "ts-standard": "^10.0.0",
+        "typescript": "^4.1.3",
+        "vsce": "^1.84.0",
+        "webpack": "^5.18.0",
+        "webpack-cli": "^4.4.0"
+    },
+    "scripts": {
+        "fix": "ts-standard --fix src/",
+        "compile": "tsc -p ./",
+        "vscode:prepublish": "npm run fix && webpack --mode production",
+        "package": "vsce package -o qbar.vsix",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch"
+    },
+    "ts-standard": {
+        "project": "./tsconfig.json"
+    }
+}

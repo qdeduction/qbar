@@ -1,0 +1,23 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "qbar",
+	"scopeName": "source.qbar",
+	"fileTypes": [".qb"],
+	"foldingStartMarker": "\\(\\s*$",
+	"foldingStopMarker": "^\\s*\\)",
+	"patterns": [{"include": "#atom"}, {"include": "#group"}],
+	"repository": {
+		"atom": {
+			"name": "atom.qbar",
+			"match": "[^\\(\\s\\)]+(?>\\\".*\\\")?[^\\(\\s\\)]*"
+		},
+		"group": {
+			"name": "expression.group",
+			"begin": "\\(",
+			"beginCaptures": {"0": { "name": "punctuation.group.open.qbar" }},
+			"patterns": [{ "include": "#atom" }, {"include": "#group"}],
+			"endCaptures": {"0": { "name": "punctuation.group.close.qbar" }},
+			"end": "\\)"
+		}
+	}
+}
