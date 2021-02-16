@@ -6,6 +6,9 @@ body {
     font-family: IBMPlexSans;
     background: #FAFBFA;
 }
+code {
+  font-family: IBMPlexMono;
+}
 .outer-frame {
     display: table;
     width: 100%;
@@ -99,7 +102,7 @@ footer {
 }
 @media (min-width: 550px) {
     .container {
-        width: 450px; 
+        width: 450px;
     }
     .column {
         margin-left: 4%;

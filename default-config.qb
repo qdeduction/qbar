@@ -1,2 +1,12 @@
+# Default Configuration File
+
+## CLI Configurations
+
+### Prompt
 (prompt "q❯ ")
-(history (file "~/.config/qbar/HISTORY" count 100000))
+
+### History
+(history (
+    file "~/.config/qbar/HISTORY"
+    count 100000))
+
