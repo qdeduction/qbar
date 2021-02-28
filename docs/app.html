@@ -15,9 +15,24 @@
 <link rel="stylesheet" href="font/IBM-Plex/family.css">
 <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
 <script type="module">
-import init from "./js/wasm.js"; init()
+  import init from "./js/wasm.js"; init()
 </script>
 </head>
-<body></body>
+<body>
+  <div id="outer-frame">
+    <div id="inner-frame">
+      <header>
+        <a target="_blank" rel="noreferrer" href="https://qbar.io">
+          <img id="logo" type="image/svg" alt="qbar logo" src="../image/icon_trimmed.svg"/>
+        </a>
+      </header>
+      <div class="container">
+      </div>
+      <footer>
+        2021 &copy; <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
+      </footer>
+    </div>
+  </div>
+</body>
 </html>
 
