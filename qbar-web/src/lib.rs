@@ -1,6 +1,3 @@
-// file: src/lib.rs
-// authors: Brandon H. Gomes
-
 //! Web Application Wrapper
 
 #[global_allocator]

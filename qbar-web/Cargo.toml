@@ -2,14 +2,16 @@
 name = "qbar-web"
 version = "0.0.0"
 edition = "2018"
+repository = "https://github.com/qdeduction/qbar"
 readme = "README.md"
 license-file = "../LICENSE"
+description = "qbar web application"
 publish = false
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-qbar = { path = "../qbar", features = ["shell", "web"] }
+qbar = { path = "../qbar", features = ["web"] }
 wasm-bindgen = "0.2"
 wee_alloc = "0.4.5"
