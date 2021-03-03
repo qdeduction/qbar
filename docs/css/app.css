@@ -78,8 +78,10 @@ footer {
     font-weight: normal;
 }
 .screen {
+    padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+    margin-bottom: 0.5em;
 }
 li {
     list-style-type: none;
@@ -91,20 +93,36 @@ li {
     word-break: break-all;
     white-space: break-spaces;
 }
-#command-line {
-    width: 100%;
-    box-sizing: border-box;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 1em;
-    padding-right: 1em;
-    border-style: solid;
-    border-color: grey;
-    border-radius: 3px;
-    border-width: 1px;
+#command-line-container {
+    display: flex;
+	justify-content: flex-start;
+}
+#prompt, #command-line {
     font-family: IBMPlexMono;
     font-size: 1em;
     background: #F5F5DC;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+}
+#prompt {
+    padding-left: 1em;
+    padding-right: 0.5em;
+    border-radius: 3px 0 0 3px;
+    border-right: 0;
+}
+#command-line {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 1em;
+    border-radius: 0 3px 3px 0;
+    border-left: 0;
+}
+#command-line:focus {
+	outline: 0;
 }
 @media (min-width: 900px) {
     .welcome-screen {
