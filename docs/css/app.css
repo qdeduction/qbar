@@ -25,7 +25,7 @@ code {
 header {
     text-align: center;
 }
-.container {
+#container {
     margin: 2em;
 }
 footer {
@@ -93,11 +93,11 @@ li {
     word-break: break-all;
     white-space: break-spaces;
 }
-#command-line-container {
+#input-container {
     display: flex;
 	justify-content: flex-start;
 }
-#prompt, #command-line {
+.input-element {
     font-family: IBMPlexMono;
     font-size: 1em;
     background: #F5F5DC;
@@ -105,30 +105,32 @@ li {
     padding-bottom: 3px;
     border-style: solid;
     border-color: grey;
-    border-width: 1px;
+    border-width: 0;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
 }
 #prompt {
     padding-left: 1em;
     padding-right: 0.5em;
     border-radius: 3px 0 0 3px;
-    border-right: 0;
+    border-left-width: 1px;
 }
-#command-line {
+#input {
     width: 100%;
     box-sizing: border-box;
     padding-left: 0;
     padding-right: 1em;
     border-radius: 0 3px 3px 0;
-    border-left: 0;
+    border-right-width: 1px;
 }
-#command-line:focus {
+#input:focus {
 	outline: 0;
 }
 @media (min-width: 900px) {
     .welcome-screen {
         width: 500px;
     }
-    .container {
+    #container {
         margin-left: 10vw;
         margin-right: 10vw;
     }
