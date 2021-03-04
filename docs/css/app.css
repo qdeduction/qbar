@@ -22,6 +22,9 @@ body {
 code {
     font-family: IBMPlexMono;
 }
+pre {
+    margin: 0;
+}
 header {
     text-align: center;
 }
@@ -89,7 +92,6 @@ li {
 .entry {
     font-family: IBMPlexMono;
     font-size: 1em;
-    margin: 0;
     word-break: break-all;
     white-space: break-spaces;
 }
@@ -108,6 +110,7 @@ li {
     border-width: 0;
     border-top-width: 1px;
     border-bottom-width: 1px;
+    margin: 0;
 }
 #prompt {
     padding-left: 1em;
@@ -122,6 +125,9 @@ li {
     padding-right: 1em;
     border-radius: 0 3px 3px 0;
     border-right-width: 1px;
+    word-break: break-all;
+    white-space: break-spaces;
+    caret-color: black;
 }
 #input:focus {
 	outline: 0;
