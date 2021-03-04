@@ -1,10 +1,14 @@
-[tasks.clean-wasm]
-command = "rm"
-args = ["-rf", "../docs/js"]
+[tasks.build]
+dependencies = [
+    "build-wasm-release",
+    "extract-wasm",
+]
 
-[tasks.clean-rust]
-command = "cargo"
-args = ["clean"]
+[tasks.debug]
+dependencies = [
+    "build-wasm-debug",
+    "extract-wasm",
+]
 
 [tasks.clean]
 dependencies = [
@@ -12,11 +16,21 @@ dependencies = [
     "clean-rust",
 ]
 
-[tasks.build-wasm]
+[tasks.build-wasm-debug]
 command = "wasm-pack"
 args = [
     "build",
-    "--release", 
+    "--debug",
+    "--target", "web",
+    "--out-name", "wasm",
+    "--out-dir", "../target/wasm"
+]
+
+[tasks.build-wasm-release]
+command = "wasm-pack"
+args = [
+    "build",
+    "--release",
     "--target", "web",
     "--out-name", "wasm",
     "--out-dir", "../target/wasm"
@@ -28,8 +42,11 @@ mkdir -p ../docs/js
 mv ../target/wasm/wasm.js ../target/wasm/wasm_bg.wasm ../docs/js/
 '''
 
-[tasks.build]
-dependencies = [
-    "build-wasm",
-    "extract-wasm",
-]
+[tasks.clean-wasm]
+command = "rm"
+args = ["-rf", "../docs/js"]
+
+[tasks.clean-rust]
+command = "cargo"
+args = ["clean"]
+
