@@ -1,12 +1,12 @@
 [tasks.build]
 dependencies = [
-    "build-wasm-release",
+    "build-wasm-debug",
     "extract-wasm",
 ]
 
-[tasks.debug]
+[tasks.release]
 dependencies = [
-    "build-wasm-debug",
+    "build-wasm-release",
     "extract-wasm",
 ]
 
