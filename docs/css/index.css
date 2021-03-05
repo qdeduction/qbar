@@ -2,29 +2,34 @@ html {
     font-size: 62.5%;
 }
 body {
-    font-size: 1.5em;
+    /* TODO dark: #050505; */
+    background-color: #FFFFFF;
+
+    /* TODO dark: #F2F2F8; */
+    color: #000000;
+
     font-family: IBMPlexSans;
-    background: #FAFBFA;
+    font-size: 1.5em;
 }
 code {
-  font-family: IBMPlexMono;
+    font-family: IBMPlexMono;
 }
 .outer-frame {
     display: table;
-    width: 100%;
     height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
     position: absolute;
     top: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
+    width: 100%;
 }
 .inner-frame {
     display: table-cell;
-    vertical-align: middle;
-    padding-top: 3em;
-    padding-bottom: 3em;
     margin: 0;
+    padding-bottom: 3em;
+    padding-top: 3em;
+    vertical-align: middle;
 }
 .container {
     margin: 0 auto;
@@ -33,15 +38,15 @@ code {
     width: 100%;
 }
 .row:after {
+    clear: both;
     content: "";
     display: table;
-    clear: both;
 }
 .column {
+    box-sizing: border-box;
+    float: left;
     text-align: center;
     width: 100%;
-    float: left;
-    box-sizing: border-box;
 }
 #logo {
     width: 100px;
@@ -50,12 +55,12 @@ code {
     filter: drop-shadow(0px 2px 0.5px rgba(0, 0, 0, 0.45));
 }
 .title {
-    font-weight: bold;
     font-size: 3.1em;
-    line-height: 1.2;
+    font-weight: bold;
     letter-spacing: -.1rem;
-    margin-top: 0;
+    line-height: 1.2;
     margin-bottom: 2rem;
+    margin-top: 0;
 }
 .subtitle {
     font-weight: normal;
@@ -64,33 +69,44 @@ code {
     margin-bottom: 0;
 }
 .button {
-    text-decoration: none;
-    color: black;
-    border-color: grey;
+    /* TODO dark: #303085; */
+    background-color: #F5F5DC;
+    border-color: rgba(172, 172, 158, 0.3);
+    border-radius: 5px;
     border-style: solid;
-    padding-top: 0.3em;
+    border-width: 1px;
+
+    /* TODO no box shadow on dark mode */
+    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+
+    /* TODO dark: #FFFFFF; */
+    color: #000000;
+
     padding-bottom: 0.3em;
     padding-left: 0.7em;
     padding-right: 0.7em;
-    background: #F5F5DC;
-    border-width: 1px;
-    border-radius: 5px;
-    box-shadow: 5px 8px 40px #EEEEEE;
+    padding-top: 0.3em;
+    text-decoration: none;
+    transition-property: background-color, border-color;
+    transition: .2s cubic-bezier(.3,0,.5,1);
 }
 .button:hover {
-    color: black;
-    border-color: black;
+    /* TODO dark: #4343A9; */
+    background-color: #F0F0C8;
+
+    /* TODO dark: border-color: #D9EAFB; */
+
     border-width: 1px;
-    background: #F2F2CF;
     box-shadow: none;
+    transition-duration: .1s;
 }
 .button-column {
-    margin-top: 1em;
     margin-bottom: 1em;
+    margin-top: 1em;
 }
 footer {
-    text-align: center;
     color: #BFBFBF;
+    text-align: center;
 }
 .footer-link {
     color: #BFBFBF;
@@ -126,9 +142,9 @@ footer {
         margin-bottom: 2.5rem;
     }
     .button-row {
+        align-items: center;
         display: flex;
         justify-content: center;
-        align-items: center;
         margin-bottom: 2em;
     }
 }
