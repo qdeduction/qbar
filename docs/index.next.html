@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>qbar | the rational proof assistant</title>
+  <meta name="description" content="qbar | the rational proof assistant">
+  <meta name="author" content="Brandon H. Gomes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="qbar">
+  <meta property="og:description" content="the rational proof assistant">
+  <meta property="og:url" content="https://qbar.io">
+  <meta property="og:site_name" content="qbar">
+  <link rel="stylesheet" href="css/normalize.css">
+  <!--<link rel="stylesheet" href="css/index.css">-->
+  <link rel="stylesheet" href="font/IBM-Plex/family.css">
+  <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
+  <style>
+    body {
+      font-family: IBMPlexSans;
+    }
+    #full-logo-container {
+      text-align: center;
+      margin-top: 5em;
+    }
+    #full-logo {
+      width: 85vw;
+      height: 40vh;
+    }
+    #logo {
+      transition: .5s cubic-bezier(.3,0,.5,1);
+    }
+    #logo:hover {
+      /* TODO: drop-shadow different amounts for each part of the svg */
+      filter: drop-shadow(0px 2.5px 0.2px rgba(0,0,0,0.1));
+      transition-duration: .1s;
+    }
+    #title {
+      font-weight: bold;
+    }
+    #title-divider {
+    }
+    #subtitle {
+      /*font-style: italic;*/
+      /*fill: blue;*/
+    }
+    .button {
+      color: black;
+      font-size: 2em;
+      padding-left: 1em;
+      padding-right: 1em;
+      text-decoration: none;
+    }
+    .button:hover {
+      border-style: solid;
+      border-width: 3px;
+      color: blue;
+    }
+    #docs {
+
+    }
+    #online-demo {
+      left: 60vw;
+      top: 40vh;
+    }
+    footer {
+      color: #BFBFBF;
+      margin: 4em;
+      text-align: center;
+    }
+    .footer-link {
+      color: #BFBFBF;
+      text-decoration: none;
+    }
+    .footer-link:hover {
+      color: #A0A0A0;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="full-logo-container">
+    <svg id="full-logo" height="340" viewBox="25 43 256 115" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">
+        <g id="logo" transform="matrix(1.1809098,0,0,1.1809098,10.124176,42.914421)">
+          <circle cx="49.389" cy="46.880001" r="25" fill="#FFFFFF" stroke="#000000" stroke-width="7.9375"/>
+          <rect x="32.064999" y="8.4685001" width="34.647999" height="4.7680998" ry="2.3840001"/>
+          <rect x="34.665001" y="24.947001" width="6.0395999" height="43.866001"/>
+          <g transform="matrix(1.0786,0.012047,-0.012047,1.0786,-51.053,-128.7)">
+            <g transform="rotate(15,131.48,125.21)">
+              <rect x="110.3" y="188.82001" width="5.0064998" height="17.165001" ry="2.5032001"/>
+              <rect transform="rotate(90)" x="200.97" y="-127.47" width="5.0064998" height="17.165001" ry="2.5032001"/>
+            </g>
+          </g>
+        </g>
+      </a>
+      <text id="title" x="112" y="97" font-size="33px">qbar</text>
+      <path id="title-divider" d="M 95.712723,103.22804 H 270.4063 v 0" stroke="#000000" stroke-width="3"/>
+      <text id="subtitle" x="138" y="116" font-size="11px">the rational proof assistant</text>
+    </svg>
+  </div>
+  <!--
+  <a id="docs" class="button" href="/docs.html">DOCS</a>
+  <a id="online-demo" class="button" href="/app.html">ONLINE DEMO</a>
+  -->
+  <footer>
+    2021 &copy; <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
+  </footer>
+</body>
+</html>
+
