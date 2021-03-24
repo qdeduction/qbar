@@ -68,7 +68,7 @@
     <p><strong>NOTE</strong>: Currently, only whitespace literals and parenthesis are escaped in quoted strings. In the future, other escape sequences may be supported.</p>
     <h3 id="expression-language-group"><a class="code" href="#expression-language-group">group</a></h3>
     <p>A <code>group</code> is an expression formed by bracketing with an open parenthesis <code class="pre">(</code>, delimiting with whitespace a set of expressions and then ending with a close parenthesis <code class="pre">)</code>.</p>
-    <pre class="syntax"><b>SYNTAX</b><br><span class="inline-code">(</span> whitespace<sup>?</sup> {<a class="ul" href="#expression-language-expr">expr</a> whitespace<sup>?</sup>}<sup>*</sup><span class="inline-code">)</span></pre>
+    <pre class="syntax"><b>SYNTAX</b><br><span class="inline-code">(</span> whitespace<sup>?</sup> {<a class="ul" href="#expression-language-expr">expr</a> whitespace<sup>?</sup>}<sup>*</sup> <span class="inline-code">)</span></pre>
     <h3 id="expression-language-expr"><a class="code" href="#expression-language-expr">expr</a></h3>
     <p>An <code>expr</code> is either an <code>atom</code> or a <code>group</code></p>
     <pre class="syntax"><b>SYNTAX</b><br><a class="ul" href="#expression-language-atom">atom</a> | <a class="ul" href="#expression-language-group">group</a></pre>
@@ -85,7 +85,8 @@
     </ul>
     <h3 id="expression-language-rule-shape"><a class="code" href="#expression-language-rule-shape">rule</a></h3>
     <p>A <code>rule</code> represents a <a>stateful inference rule</a> which can be joined with <a class="ul code" href="#expression-language-substitution-shape">substitutions</a> to make a <a class="ul code" href="#expression-language-composition-shape">composition</a>.</p>
-    <pre class="syntax"><b>SHAPE</b><br>[premise: <a class="ul" href="#expression-language-group">group</a>] [conclusion: <a class="ul" href="#expression-language-group">group</a>]</pre>
+    <pre class="syntax"><b>SHAPE</b><br>[top: <a class="ul" href="#expression-language-group">group</a>] [bot: <a class="ul" href="#expression-language-group">group</a>]</pre>
+    <p>The <code class="pre">top</code> expression is also known as the <code>premise</code> and the <code class="pre">bot</code> expression is also known as the <code>conclusion</code>.</p>
     <h3 id="expression-language-composition-shape"><a class="code" href="#expression-language-composition-shape">composition</a></h3>
     <p>A <code>composition</code> represents a chain of <a class="ul code" href="#expression-language-rule-shape">rule</a>-<a class="ul code" href="#expression-language-substitution-shape">substitution</a> pairs composed from top to bottom.</p>
     <pre class="syntax"><b>SHAPE</b><br>{[rule: {<a class="ul">hash</a> | <a class="ul" href="#expression-language-rule-shape">rule</a>}] [substitution: {<a class="ul">hash</a> | <a class="ul" href="#expression-language-substitution-shape">substitution</a>}]}<sup>*</sup></pre>
