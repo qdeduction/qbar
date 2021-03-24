@@ -1,14 +1,14 @@
 header {
-  position: sticky;
-  top: 0;
-  padding-top: 0.6em;
+  background-color: #FFFFFF;
+  border-bottom-color: #D0D0D0;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
   padding-bottom: 0.6em;
   padding-left: 16vw;
   padding-right: 16vw;
-  background-color: #FFFFFF;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #D0D0D0;
+  padding-top: 0.6em;
+  position: sticky;
+  top: 0;
 }
 #full-logo-container:hover {
   filter: invert(0.35);
@@ -29,6 +29,7 @@ header {
 }
 #subtitle {
   font-size: 0.8em;
+  white-space: pre;
 }
 @media (max-width: 795px) {
   #title-container {
@@ -39,15 +40,15 @@ header {
   margin-left: auto;
 }
 #menu-container > div > a {
-  margin-left: 0.7em;
-  color: black;
   border-bottom-width: 1.5px;
+  color: black;
+  margin-left: 0.7em;
   text-decoration: none;
 }
 #menu-container > div > a:hover,
 #menu-container > div#menu-active > a {
-  color: blue;
   border-bottom-style: solid;
+  color: blue;
 }
 @media (max-width: 540px) {
   /* TODO: make vertical menu items */
@@ -74,25 +75,25 @@ code {
 pre > code,
 pre.code,
 pre.syntax {
-  margin: 0 .2em;
-  font-size: 90%;
   background-color: #F1F1F1;
-  border: 1px solid #E1E1E1;
   border-radius: 4px;
+  border: 1px solid #E1E1E1;
   display: block;
+  font-size: 90%;
+  margin: 0 .2em;
+  overflow-x: auto;
   padding: 1em 1em;
   white-space: pre;
-  overflow-x: auto;
 }
 code.pre,
 .inline-code {
-  font-size: 90%;
   background-color: #F1F1F1;
-  border: 1px solid #E1E1E1;
   border-radius: 4px;
+  border: 1px solid #E1E1E1;
+  font-size: 90%;
+  overflow-x: auto;
   padding: 0 0.4em;
   white-space: pre;
-  overflow-x: auto;
 }
 pre.syntax {
   padding-top: 0.7em;
@@ -160,8 +161,8 @@ main > h6 > a:hover {
   border-bottom-style: solid;
 }
 main > .description {
-  font-style: italic;
   display: block;
+  font-style: italic;
   margin: -1em auto 1em auto;
 }
 #main-title {
@@ -171,13 +172,13 @@ main > .description {
   text-align: center;
 }
 .wip-warning {
-  width: 90%;
-  margin: 2em auto 3em auto;
+  align-items: center;
   background-color: #F03258;
   color: white;
-  text-align: center;
   display: flex;
-  align-items: center;
+  margin: 2em auto 3em auto;
+  text-align: center;
+  width: 90%;
 }
 .wip-warning > p {
   margin: 0.5em 0;
@@ -193,10 +194,10 @@ main > .description {
 }
 .button {
   background-color: black;
-  color: white;
-  text-decoration: none;
   border-radius: 0.5em;
+  color: white;
   padding: 0.3em 0.5em;
+  text-decoration: none;
 }
 .button:hover {
   background-color: grey;
