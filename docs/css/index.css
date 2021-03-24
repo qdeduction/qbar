@@ -196,9 +196,9 @@ section > div {
   white-space: pre;
 }
 #rules-example {
-  background-color: #050;
-  border-color: #050;
-  color: yellow;
+  background-color: #005;
+  border-color: #005;
+  color: white;
   display: flex;
   align-items: center;
   padding: 0.85em 0.75em;
