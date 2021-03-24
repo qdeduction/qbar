@@ -1,57 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>qbar documentation</title>
-  <meta name="description" content="qbar documentation">
-  <meta name="author" content="Brandon H. Gomes">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="qbar">
-  <meta property="og:description" content="documentation">
-  <meta property="og:url" content="https://qbar.io/docs">
-  <meta property="og:site_name" content="qbar documentation">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="font/IBM-Plex/family.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
+<meta charset="utf-8">
+<title>qbar documentation</title>
+<meta name="description" content="qbar documentation">
+<meta name="author" content="Brandon H. Gomes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="qbar">
+<meta property="og:description" content="documentation">
+<meta property="og:url" content="https://qbar.io/docs">
+<meta property="og:site_name" content="qbar documentation">
+<!-- TODO: <link rel="stylesheet" href="css/normalize.css">-->
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/page.css">
+<link rel="stylesheet" href="css/full-footer.css">
+<link rel="stylesheet" href="font/IBM-Plex/family.css">
+<link rel="icon" type="image/svg" href="image/logo-with-background-blue.svg">
 </head>
 <body>
-  <header id="header">
-    <div id="header-box" class="flex-center">
-      <a href="/">
-        <img id="header-icon" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg">
-      </a>
-      <div id="header-title">
-        <b style="font-size: 1.3em;">qbar</b>
-        <i style="color: red">(pre-&alpha;)</i>
-        <br>
-        <i style="font-size: 0.8em;">the rational proof assistant</i>
+  <header class="flex-center">
+    <a class="blank" href="/">
+      <div id="full-logo-container" class="flex-center">
+        <img id="logo" alt="qbar logo" src="image/logo.svg">
+        <div id="title-container">
+          <h1 id="title">qbar</h1>
+          <span id="subtitle">the rational proof assistant</span>
+        </div>
       </div>
-      <div style="margin-left: auto">
-        <a class="menu-button" href="/install.html">INSTALL</a>
-      </div>
-      <div>
-        <a class="menu-button" href="https://github.com/qdeduction/qbar">SOURCE</a>
-      </div>
+    </a>
+    <div id="menu-container" class="flex-center">
+      <div><a href="/get-started.html">GET STARTED</a></div>
+      <div id="menu-active"><a href="/docs.html">DOCS</a></div>
+      <div><a href="/app.html">WEB SHELL</a></div>
+      <div><a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">SOURCE</a></div>
     </div>
   </header>
-  <div class="container">
-    <h1>Documentation</h1>
-    <p>The documentation is currently a work in progress. For now, see the <a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">source code repository</a> for more information on this project.</p>
-  </div>
-  <footer id="footer">
+  <main>
+    <p id="main-title">DOCUMENTATION</p>
+    <div class="wip-warning">
+      <p>The documentation and API is currently a work in progress. See the <a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">source code repository</a> for more information.</p>
+    </div>
+    <h1 id="expression-language"><a href="#expression-language">EXPRESSION LANGUAGE</a></h1>
+    <p><span class="name">QBAR</span> uses an <code>s-expression</code> language to describe all of its data structures and abstract syntax. <code>S-expressions</code> are parenthesis-grouped strings which can be distinguished into two basic forms: <a class="ul code" href="#expression-language-atom">atoms</a> and <a class="ul code" href="#expression-language-group">groups</a>. <code>S-expressions</code> are the syntax of choice for LISP dialects like <a target="_blank" rel="noreferrer" href="https://common-lisp.net">Common Lisp</a>, <a target="_blank" rel="noreferrer" href="https://clojure.org">Clojure</a>, <a target="_blank" rel="noreferrer" href="https://racket-lang.org">Racket</a>, and many others. <span class="name">QBAR</span> expressions are slightly more general in that they intend to describe arbitrary data rather than just programs. See <a target="_blank" rel="noreferrer" href="https://people.csail.mit.edu/rivest/sexp.html">Rivest S-expressions</a> which have a similar goal.</p>
+    <p><strong>NOTE</strong>: Objects marked with &#9888;&#65039; have an unstable API.</p>
+    <h2 id="expression-language-basic-forms"><a href="#expression-language-basic-forms">Basic Forms</a></h2>
+    <p>Expressions are either <a class="ul code" href="#expression-language-atom">atoms</a>, <a class="ul code" href="#expression-language-group">groups</a>, or unspecified, in which case they are simply called <a class="ul code" href="#expression-language-expr">exprs</a>.</p>
+    <h3 id="expression-language-atom"><a class="code" href="#expression-language-atom">atom</a> &#9888;&#65039;</h3>
+    <p>An <code>atom</code> is any Unicode string which uses <code class="pre">"</code> to wrap <code>whitespace</code> and <code class="pre">(</code> <code class="pre">)</code>. Here are some examples:</p>
+    <pre class="code" style="white-space: pre-line">
+      123
+
+      "a b c"
+
+      f"Hello, {world}!"
+
+      "multi-line
+      strings"
+
+      text-before-the-quote"text in the quote"text-after-the-quote
+
+      []{}&lt;&gt;-are-also"atoms since we only care about ()"&lt;-notice_we_had_to_escape"("and")"
+
+      emoji.too:&#128511;:&#128514;
+    </pre>
+    <p>Here's a regular expression that parses <code>atoms</code>:</p>
+    <pre class="syntax"><b>RAW SYNTAX</b><br><a class="regex-link" target="_blank" rel="noreferrer" href="https://regex101.com/library/Paz9sz">([^\"\(\s\)]+((\"[^\"]*\")[^\"\(\s\)]*)*)|([^\"\(\s\)]*((\"[^\"]*\")[^\"\(\s\)]*)+)</a></pre>
+    <p><strong>NOTE</strong>: Currently, only whitespace literals and parenthesis are escaped in quoted strings. In the future, other escape sequences may be supported.</p>
+    <h3 id="expression-language-group"><a class="code" href="#expression-language-group">group</a></h3>
+    <p>A <code>group</code> is an expression formed by bracketing with an open parenthesis <code class="pre">(</code>, delimiting with whitespace a set of expressions and then ending with a close parenthesis <code class="pre">)</code>.</p>
+    <pre class="syntax"><b>SYNTAX</b><br><span class="inline-code">(</span> whitespace<sup>?</sup> {<a class="ul" href="#expression-language-expr">expr</a> whitespace<sup>?</sup>}<sup>*</sup><span class="inline-code">)</span></pre>
+    <h3 id="expression-language-expr"><a class="code" href="#expression-language-expr">expr</a></h3>
+    <p>An <code>expr</code> is either an <code>atom</code> or a <code>group</code></p>
+    <pre class="syntax"><b>SYNTAX</b><br><a class="ul" href="#expression-language-atom">atom</a> | <a class="ul" href="#expression-language-group">group</a></pre>
+    <h2 id="expression-language-shapes"><a href="#expression-language-shapes">Important Shapes</a></h2>
+    <p><strong>NOTE</strong>: Shapes have the same syntax as expressions except we don't notate optional whitespace and wrapping group, and <code class="pre">[$name: $shape]</code> objects are used to name the shape elements.</p>
+    <p>The following are some important shapes:</p>
+    <h3 id="expression-language-substitution-shape"><a class="code" href="#expression-language-substitution-shape">substitution</a></h3>
+    <p>A substitution represents a piecewise transformation of the kind <code class="pre">Atom -&gt; Expr</code> mapped over an expressions atoms. For every <code class="pre">var</code> which appears in a given expression, <code class="pre">expr</code> replaces every occurence of that atom in the entire expression.</p>
+    <pre class="syntax"><b>SHAPE</b><br>{[var: <a class="ul" href="#expression-language-atom">atom</a>] [expr: <a class="ul" href="#expression-language-expr">expr</a>]}<sup>*</sup></pre>
+    <p><strong>NOTE</strong>: If two equal <code class="pre">var</code> appear in the same substitution, the first one is used.</p>
+    <span>RELATED</span>
+    <ul class="related-items">
+      <li><a class="ul" href="#shell-subst-command">shell <code>subst</code> command</a></li>
+    </ul>
+    <h3 id="expression-language-rule-shape"><a class="code" href="#expression-language-rule-shape">rule</a></h3>
+    <p>A <code>rule</code> represents a <a>stateful inference rule</a> which can be joined with <a class="ul code" href="#expression-language-substitution-shape">substitutions</a> to make a <a class="ul code" href="#expression-language-composition-shape">composition</a>.</p>
+    <pre class="syntax"><b>SHAPE</b><br>[premise: <a class="ul" href="#expression-language-group">group</a>] [conclusion: <a class="ul" href="#expression-language-group">group</a>]</pre>
+    <h3 id="expression-language-composition-shape"><a class="code" href="#expression-language-composition-shape">composition</a></h3>
+    <p>A <code>composition</code> represents a chain of <a class="ul code" href="#expression-language-rule-shape">rule</a>-<a class="ul code" href="#expression-language-substitution-shape">substitution</a> pairs composed from top to bottom.</p>
+    <pre class="syntax"><b>SHAPE</b><br>{[rule: {<a class="ul">hash</a> | <a class="ul" href="#expression-language-rule-shape">rule</a>}] [substitution: {<a class="ul">hash</a> | <a class="ul" href="#expression-language-substitution-shape">substitution</a>}]}<sup>*</sup></pre>
+    <h3 id="expression-language-ruleset-shape"><a class="code" href="#expression-language-ruleset-shape">ruleset</a></h3>
+    <p>A <code>ruleset</code> is a collection of <a class="ul code" href="#expression-language-rule-shape">rules</a> along with a set of <a class="ul code" href="#expression-language-substitution-shape">substitution</a> constants which are not allowed to be substituted out of. A <a class="ul code" href="#expression-language-composition-shape">composition</a> belongs to the closure of a <code>ruleset</code> if all of its rules are in the <code>ruleset</code> and no <a class="ul code" href="#expression-language-substitution-shape">substitution</a> has any constant as one of its <code class="pre">var</code>.</p>
+    <pre class="syntax"><b>SHAPE</b><br>[constants: <span class="inline-code">(</span> <a class="ul" href="#expression-language-atom">atom</a><sup>*</sup> <span class="inline-code">)</span>] [rules: <span class="inline-code">(</span> {<a class="ul">hash</a> | <a class="ul" href="#expression-language-rule-shape">rule</a>}<sup>*</sup> <span class="inline-code">)</span>]</pre>
+    <h3 id="expression-language-definition-shape"><a class="code" href="#expression-language-definition-shape">definition</a> &#9888;&#65039;</h3>
+    <p>A definition is the assignment of a name and variables to an expression.</p>
+    <pre class="syntax"><b>SHAPE</b><br><span class="inline-code">def</span> [name: <a class="ul" href="#expression-language-atom">atom</a>] [vars: <span class="inline-code">(</span> <a class="ul" href="#expression-language-atom">atom</a><sup>*</sup> <span class="inline-code">)</span>] [expr: <a class="ul" href="#expression-language-expr">expr</a>]</pre>
+    <h3 id="expression-language-defset-shape"><a class="code" href="#expression-language-defset-shape">defset</a></h3>
+    <p>This shape represents any collection of <a class="ul" href="#expression-language-definition-shape">definitions</a>. For the shape to be a valid set of definitions, it must not contain duplicate name assignments.</p>
+    <pre class="syntax"><b>SHAPE</b><br>{<a class="ul">hash</a> | <a class="ul" href="#expression-language-definition-shape">definition</a>}<sup>*</sup></pre>
+    <h2 id="expression-language-parsers"><a href="#expression-language-parsers">Reference Parsers</a></h2>
+    <p>Currently all expression parsers are built into the <a class="ul" href="#shell-implementations">reference shell implementations</a>. In the future, they will be separated into their own libraries.</p>
     <hr>
-    <div class="flex-center footer-flex">
-      <div style="margin-right: auto">
-        2021 &copy; <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
+    <h1 id="shell"><a href="#shell">SHELL</a></h1>
+    <p>The shell is the default way to interact with <span class="name">QBAR</span> <a class="ul code" href="#expression-language">expressions</a>. You can use the <code>shell</code> to build, verify, and analyze compositions and other proof objects.</p>
+    <h2 id="shell-commands"><a href="#shell-commands">Commands</a></h2>
+    <p>The following are a list of the currently implemented commands.</p>
+    <p><strong>NOTE</strong>: Commands marked with &#9888;&#65039; have an unstable name, API, and/or signature.</p>
+    <h3 id="shell-clear-command"><a class="code" href="#shell-clear-command">clear</a></h3>
+    <span class="description">clears the screen</span>
+    <i>Same as <a class="ul code" href="#shell-clear-screen-keybinding">^L</a>.</i>
+    <h3 id="shell-config-command"><a class="code" href="#shell-config-command">config</a> &#9888;&#65039;</h3>
+    <span class="description">gets/sets configuration options</span>
+    <h3 id="shell-docs-command"><a class="code" href="#shell-docs-command">docs</a> &#9888;&#65039;</h3>
+    <span class="description">documentation inside the shell</span>
+    <h3 id="shell-eval-command"><a class="code" href="#shell-eval-command">eval</a> &#9888;&#65039;</h3>
+    <span class="description">reduces compositions to rules</span>
+    <h3 id="shell-find-command"><a class="code" href="#shell-find-command">find</a> &#9888;&#65039;</h3>
+    <span class="description">looks for expressions</span>
+    <h3 id="shell-info-command"><a class="code" href="#shell-info-command">info</a> &#9888;&#65039;</h3>
+    <span class="description">information about an expression</span>
+    <h3 id="shell-load-command"><a class="code" href="#shell-load-command">load</a> &#9888;&#65039;</h3>
+    <span class="description">loads expressions</span>
+    <h3 id="shell-ruleset-command"><a class="code" href="#shell-ruleset-command">ruleset</a> &#9888;&#65039;</h3>
+    <span class="description">information about a ruleset</span>
+    <h3 id="shell-search-command"><a class="code" href="#shell-search-command">search</a> &#9888;&#65039;</h3>
+    <span class="description">searches for compositions</span>
+    <h3 id="shell-subst-command"><a class="code" href="#shell-subst-command">subst</a><code>: &lt;expr&gt; &lt;substitution&gt;</code></h3>
+    <span class="description">substitute out of an expression</span>
+    <h3 id="shell-tutorial-command"><a class="code" href="#shell-tutorial-command">tutorial</a> &#9888;&#65039;</h3>
+    <span class="description">runs the tutorial in the shell</span>
+    <h3 id="shell-verify-command"><a class="code" href="#shell-verify-command">verify</a> &#9888;&#65039;</h3>
+    <span class="description">verifies that a <code>rule</code> belongs to the composition closure of the given <code>ruleset</code></span>
+    <h3 id="shell-version-command"><a class="code" href="#shell-version-command">version</a></h3>
+    <span class="description">prints shell version information</span>
+    <h3 id="shell-exit-command"><a class="code" href="#shell-exit-command">exit</a></h3>
+    <span class="description">exits the shell</span>
+    <i>Same as <a class="ul code" href="#shell-exit-keybinding">exit</a>.</i>
+    <h2 id="shell-keybindings"><a href="#shell-keybindings">Keybindings</a></h2>
+    <p>The following are the default shell <code>emacs</code>-like keybindings for the reference shell implementations. Custom and <code>vim</code>-like keybindings are not yet implemented.</p>
+    <h3 id="shell-line-start-keybinding"><a class="code" href="#shell-line-start-keybinding">^A</a></h3>
+    <span class="description">line start</span>
+    <h3 id="shell-cancel-keybinding"><a class="code" href="#shell-cancel-keybinding">^C</a></h3>
+    <span class="description">cancel</span>
+    <h3 id="shell-exit-keybinding"><a class="code" href="#shell-exit-keybinding">^D</a></h3>
+    <span class="description">exit/restart</span>
+    <i>Same as <a class="ul code" href="#shell-exit-command">exit</a>.</i>
+    <h3 id="shell-line-end-keybinding"><a class="code" href="#shell-line-end-keybinding">^E</a></h3>
+    <span class="description">line end</span>
+    <h3 id="shell-clear-screen-keybinding"><a class="code" href="#shell-clear-screen-keybinding">^L</a></h3>
+    <span class="description">clears the screen</span>
+    <i>Same as <a class="ul code" href="#shell-clear-command">clear</a>.</i>
+    <h2 id="shell-implementations"><a href="#shell-implementations">Reference Implementations</a></h2>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar/actions">
+      <img alt="Worlflow Status" src="https://flat.badgen.net/github/checks/qdeduction/qbar?label=workflow">
+    </a>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://crates.io/crates/qbar">
+      <img alt="Project Crate" src="https://flat.badgen.net/crates/v/qbar">
+    </a>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://docs.rs/qbar">
+      <img alt="Documentation" src="https://flat.badgen.net/badge/docs/latest/blue">
+    </a>
+    <p>The <code>qbar</code> toolkit comes with two reference shell implementations written in Rust:</p>
+    <h3 id="shell-terminal-implementation"><a href="#shell-terminal-implementation">Terminal</a></h3>
+    <p>The reference terminal shell can be installed with <code>cargo</code> as follows:</p>
+    <pre class="code">cargo install qbar</pre>
+    <p>For more information on the terminal shell implementation see the <a target="_blank" rel="noreferrer" href="https://docs.rs/qbar">Rust documentation</a>.</p>
+    <h3 id="shell-web-implementation"><a href="#shell-web-implementation">Web</a></h3>
+    <p>The reference web shell is built off of the <a class="ul" href="#shell-terminal-implementation">reference terminal shell</a> and can be accessed <a href="/app.html">on the main <code>qbar</code> website</a>. For more information on the web shell implementation see the <a target="_blank" rel="noreferrer" href="https://docs.rs/qbar">Rust documentation</a>.</p>
+    <!-- Section Template
+    <hr>
+    <h1><a>...</a></h1>
+    <p>...</p>
+    -->
+  </main>
+  <footer>
+    <hr>
+    <div id="footer-container">
+      <div>
+        2021 ©
+        <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">
+          Brandon H. Gomes
+        </a>
       </div>
-      <a class="footer-link" href="/install.html">INSTALL</a>
-      <a href="/">
-        <img id="footer-icon" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg">
-      </a>
-      <a class="footer-link" href="/info.html">INFO</a>
-      <div style="margin-left: auto">
-        Last Updated: <a class="footer-link" target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar/tree/master/docs">2021-01-07</a>
+      <a href="/"><img id="footer-logo" alt="qbar logo" src="image/logo.svg"></a>
+      <div>
+        Last Updated:
+        <a class="footer-link" target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar/tree/master/docs">
+          2021-03-22
+        </a>
       </div>
     </div>
   </footer>

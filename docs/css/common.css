@@ -1,0 +1,69 @@
+body {
+  font-family: "IBM Plex Sans";
+  margin: 0;
+}
+code, pre, .code, .name {
+  font-family: "IBM Plex Mono";
+}
+.centered {
+  margin: 0 auto;
+  width: max-content;
+}
+.centered-text, header, footer {
+  text-align: center;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.select-all {
+  user-select: all;
+}
+.flex-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.flex-center {
+  align-items: center;
+  display: flex;
+}
+sup {
+  font-size: 0.75em;
+}
+sup > a, .blank {
+  text-decoration: none;
+}
+.ul {
+  color: black;
+  text-decoration: underline;
+}
+.ul:hover {
+  color: blue;
+}
+.footnote {
+  font-size: 0.8em;
+  margin-left: 0.5em;
+}
+.frame-container {
+  display: table;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.frame {
+  display: table-cell;
+  vertical-align: middle;
+}
+footer, footer > a, .footer-link {
+  color: #999999;
+  text-decoration: none;
+}
+footer > a:hover, .footer-link:hover {
+  filter: invert(0.9);
+  text-decoration: underline;
+}

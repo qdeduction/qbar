@@ -1,0 +1,31 @@
+footer {
+  margin: 2em auto;
+  width: 70vw;
+  max-width: 850px;
+}
+footer > hr {
+  border-width: 0;
+  border-top: 1px solid #E1E1E1;
+}
+#footer-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0.85em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+#footer-container > div:first-of-type {
+  margin-right: auto;
+}
+#footer-container > div:last-of-type {
+  margin-left: auto;
+}
+#footer-logo {
+  height: 30px;
+  display: block;
+  filter: invert(0.6);
+}
+#footer-logo:hover {
+  filter: invert(0.3);
+}
+

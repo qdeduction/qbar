@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>qbar | the rational proof assistant</title>
-  <meta name="description" content="qbar | the rational proof assistant">
-  <meta name="author" content="Brandon H. Gomes">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="qbar">
-  <meta property="og:description" content="the rational proof assistant">
-  <meta property="og:url" content="https://qbar.io/404.html">
-  <meta property="og:site_name" content="qbar">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="font/IBM-Plex/family.css">
-  <link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
+<meta charset="utf-8">
+<title>qbar | the rational proof assistant</title>
+<meta name="description" content="qbar | the rational proof assistant">
+<meta name="author" content="Brandon H. Gomes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="qbar">
+<meta property="og:description" content="the rational proof assistant">
+<meta property="og:url" content="https://qbar.io/404.html">
+<meta property="og:site_name" content="qbar">
+<!-- TODO: <link rel="stylesheet" href="css/normalize.css">-->
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/error.css">
+<link rel="stylesheet" href="font/IBM-Plex/family.css">
+<link rel="icon" type="image/svg" href="image/logo-with-background-blue.svg">
 </head>
 <body>
-  <div class="outer-frame">
-    <div class="inner-frame">
-      <div class="container">
-        <div style="text-align: center">
-          <b style="font-size: 14em">404</b>
-          <p style="font-size: 2em; margin-top: -1em; margin-bottom: 2em"><code>not found</code></p>
-        </div>
-        <div class="row" style="margin-top: 1em">
-          <div class="column">
-            <a rel="noreferrer" href="/">
-              <img id="logo" type="image/svg" alt="qbar logo" src="image/icon_trimmed.svg" style="width: 8em">
-            </a>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 1em">
-          <div class="column">
-            <h1 class="title">qbar</h1>
-            <p class="subtitle" style="margin-bottom: 1em">the rational proof assistant</p>
-          </div>
-        </div>
-      </div>
+  <div class="frame-container">
+    <div class="frame">
+      <header>
+        <a href="/">
+          <img id="logo" alt="qbar logo" src="image/logo.svg">
+        </a>
+      </header>
+      <main class="centered centered-text">
+        <h1 id="error-code">404</h1>
+        <code id="error-message"><strong class="error">error</strong>: not found</code>
+      </main>
       <footer>
-        2021 &copy; <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
+        2021 &copy; <a target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
       </footer>
     </div>
   </div>

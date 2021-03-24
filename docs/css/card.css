@@ -1,0 +1,42 @@
+.card,
+.shadow {
+  box-shadow: 0px 2.5px 0.1px rgba(0, 0, 0, 0.1);
+}
+.box,
+.card {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.2em;
+  padding: 0.7em;
+}
+.card {
+  margin: 1em auto;
+  height: max-content;
+  width: max-content;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+.hash,
+.card-hash {
+  font-family: "IBM Plex Mono";
+  color: black;
+  text-decoration: none;
+}
+.hash:hover,
+.card-hash:hover {
+  text-decoration: underline;
+}
+.card-wrapper {
+  width: max-content;
+  margin: 0 auto 1em auto;
+}
+.card-hash {
+  display: block;
+  text-align: right;
+  color: orange;
+  font-size: 0.8em;
+  font-style: italic;
+  font-weight: bold;
+  margin: -1em 0.5em 0 0;
+}
+

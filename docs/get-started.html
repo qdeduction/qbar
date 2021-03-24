@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qbar documentation</title>
+<meta name="description" content="qbar documentation">
+<meta name="author" content="Brandon H. Gomes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="qbar">
+<meta property="og:description" content="getting started with qbar">
+<meta property="og:url" content="https://qbar.io/get-started">
+<meta property="og:site_name" content="qbar getting started">
+<!-- TODO: <link rel="stylesheet" href="css/normalize.css">-->
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/page.css">
+<link rel="stylesheet" href="css/full-footer.css">
+<link rel="stylesheet" href="font/IBM-Plex/family.css">
+<link rel="icon" type="image/svg" href="image/logo-with-background-blue.svg">
+</head>
+<body>
+  <header class="flex-center">
+    <a class="blank" href="/">
+      <div id="full-logo-container" class="flex-center">
+        <img id="logo" alt="qbar logo" src="image/logo.svg">
+        <div id="title-container">
+          <h1 id="title">qbar</h1>
+          <span id="subtitle">the rational proof assistant</span>
+        </div>
+      </div>
+    </a>
+    <div id="menu-container" class="flex-center">
+      <div id="menu-active"><a href="/get-started.html">GET STARTED</a></div>
+      <div><a href="/docs.html">DOCS</a></div>
+      <div><a href="/app.html">WEB SHELL</a></div>
+      <div><a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">SOURCE</a></div>
+    </div>
+  </header>
+  <main>
+    <p id="main-title">GETTING STARTED with QBAR</p>
+    <div class="wip-warning">
+      <p>The documentation and API is currently a work in progress. See the <a target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar">source code repository</a> for more information.</p>
+    </div>
+    <h1 id="start-shell"><a href="#start-shell">STEP 1: Boot Up a Shell</a></h1>
+    <p>Start off by downloading a <a class="ul" href="#start-shell-terminal">terminal shell</a> or running the <a class="ul" href="#start-shell-web">web shell</a> in another window. Once you get there, type in <code class="pre">?</code> to see the help menu and/or run the <a class="ul" href="/docs.html#shell-tutorial-command"><code>tutorial</code></a> command to see a list of tutorials. You can proceed by using those tutorials or by continuing here.</p>
+    <h2 id="start-shell-terminal"><a href="#start-shell-terminal">Installing a Terminal Shell</a></h2>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar/actions">
+      <img alt="Worlflow Status" src="https://flat.badgen.net/github/checks/qdeduction/qbar?label=workflow">
+    </a>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://crates.io/crates/qbar">
+      <img alt="Project Crate" src="https://flat.badgen.net/crates/v/qbar">
+    </a>
+    <a class="blank" target="_blank" rel="noreferrer" href="https://docs.rs/qbar">
+      <img alt="Documentation" src="https://flat.badgen.net/badge/docs/latest/blue">
+    </a>
+    <p>The reference terminal shell is built with <a target="_blank" rel="noreferrer" href="https://rust-lang.org">Rust</a> and can be installed with <code>cargo</code> as follows:</p>
+    <pre class="select-all"><code>cargo install qbar</code></pre>
+    <p>For more information on the terminal shell implementation see the <a target="_blank" rel="noreferrer" href="https://docs.rs/qbar">Rust documentation</a>.</p>
+    <h2 id="start-shell-web"><a href="#start-shell-web">Runnning the Web Shell</a></h2>
+    <p><a class="button" target="_blank" href="/app.html">Open in New Tab</a></p>
+    <p>For more information on the web shell implementation see the <a target="_blank" rel="noreferrer" href="https://docs.rs/qbar">Rust documentation</a>.</p>
+    <h1 id="s-expr"><a href="#s-expr">STEP 2: Get to Know S-expressions</a></h1>
+    <strong class="wip-text">WIP</strong>
+    <p>In the meantime, see the <a href="/docs.html#expression-language"><code>s-expression</code> documentation</a> for more information.</p>
+    <h1 id="composition-algorithm"><a href="#composition-algorithm">STEP 3: Learn the Rule-Composition Algorithm</a></h1>
+    <strong class="wip-text">WIP</strong>
+  </main>
+  <footer>
+    <hr>
+    <div id="footer-container">
+      <div>
+        2021 ©
+        <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">
+          Brandon H. Gomes
+        </a>
+      </div>
+      <a href="/"><img id="footer-logo" alt="qbar logo" src="image/logo.svg"></a>
+      <div>
+        Last Updated:
+        <a class="footer-link" target="_blank" rel="noreferrer" href="https://github.com/qdeduction/qbar/tree/master/docs">
+          2021-03-22
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

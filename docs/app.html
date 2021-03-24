@@ -10,20 +10,19 @@
 <meta property="og:description" content="qbar web app">
 <meta property="og:url" content="https://qbar.io/app">
 <meta property="og:site_name" content="qbar web app">
-<link rel="stylesheet" href="css/normalize.css">
+<!--TODO: <link rel="stylesheet" href="css/normalize.css">-->
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="font/IBM-Plex/family.css">
-<link rel="icon" type="image/svg" href="image/icon_white_blue.svg">
-<script type="module">
-  import init from "./js/wasm.js"; init()
-</script>
+<link rel="icon" type="image/svg" href="image/logo-with-background-blue.svg">
+<script type="module">import init from "./js/wasm.js"; init()</script>
 </head>
 <body>
-  <div id="outer-frame">
-    <div id="inner-frame">
+  <div class="frame-container">
+    <div class="frame">
       <header>
-        <a rel="noreferrer" href="/">
-          <img id="logo" alt="qbar logo" src="../image/icon_trimmed.svg"/>
+        <a href="/">
+          <img id="logo" alt="qbar logo" src="image/logo.svg"/>
         </a>
       </header>
       <div id="container">
@@ -37,7 +36,7 @@
         </div>
       </div>
       <footer>
-        2021 &copy; <a class="footer-link" target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
+        2021 &copy; <a target="_blank" rel="noreferrer" href="https://bhgomes.dev">Brandon H. Gomes</a>
       </footer>
     </div>
   </div>
