@@ -1,0 +1,99 @@
+Resolution Proof System
+=======================
+
+Resolution Rules
+================
+
+4c30a750dc7f0cb177e5e2cc1463f9acc2867d1db56153fa99bd1f14cc8b4818
+((
+    (L | m) ((- m) | R)
+)(
+    (L | R)
+))
+
+152c868428e1643ad30058e6e1d322d64791d0f7ab273831a300aa52f75ca208
+((
+    (L | m) (R | (- m))
+)(
+    (L | R)
+))
+
+04ecde5fa271349ac5409f1fb3d8b71b9fd81f61cd97da697d8e794fedc70d4f
+((
+    (m | L) ((- m) | R)
+)(
+    (L | R)
+))
+
+1359662bd805323c1ae38870b4d37a753a09d907652d25921373e5e9863cb432
+((
+    (m | L) (R | (- m))
+)(
+    (L | R)
+))
+
+1e68c5506a6758aedf85d34012a1760ea09eace55125c32737c169151bf1d375
+((
+    (m | (- m))
+)(
+    %
+))
+
+6419fa1c24b8599b0e6e969a7c5bcd4547bf81ca8e9701dfab44e9cd7140ff84
+((
+    ((- m) | m)
+)(
+    %
+))
+
+dff8dfcc7969be6d03a524cf1e61e7bc8f45346e83d434601de859b0f6fd3230
+((
+    c %
+)(
+    %
+))
+
+Weakening Rules
+===============
+
+334b69339f34454b3cdd39d6d1d4e57e2e59ddee99870d7c8d65be7c2c45359a
+((
+    M
+)(
+    (N | M)
+))
+
+f0a2680c09570f9458abc5e4a6c3b7dac7971cdeaed08b7ec090d8a17bee4244
+((
+    M
+)(
+    (M | N)
+))
+
+Resolution Ruleset
+==================
+
+((- | %) (
+    4c30a750dc7f0cb177e5e2cc1463f9acc2867d1db56153fa99bd1f14cc8b4818
+    152c868428e1643ad30058e6e1d322d64791d0f7ab273831a300aa52f75ca208
+    04ecde5fa271349ac5409f1fb3d8b71b9fd81f61cd97da697d8e794fedc70d4f
+    1359662bd805323c1ae38870b4d37a753a09d907652d25921373e5e9863cb432
+    1e68c5506a6758aedf85d34012a1760ea09eace55125c32737c169151bf1d375
+    6419fa1c24b8599b0e6e969a7c5bcd4547bf81ca8e9701dfab44e9cd7140ff84
+    dff8dfcc7969be6d03a524cf1e61e7bc8f45346e83d434601de859b0f6fd3230
+))
+
+Resolution Ruleset + Weakening
+==============================
+
+((- | %) (
+    4c30a750dc7f0cb177e5e2cc1463f9acc2867d1db56153fa99bd1f14cc8b4818
+    152c868428e1643ad30058e6e1d322d64791d0f7ab273831a300aa52f75ca208
+    04ecde5fa271349ac5409f1fb3d8b71b9fd81f61cd97da697d8e794fedc70d4f
+    1359662bd805323c1ae38870b4d37a753a09d907652d25921373e5e9863cb432
+    1e68c5506a6758aedf85d34012a1760ea09eace55125c32737c169151bf1d375
+    6419fa1c24b8599b0e6e969a7c5bcd4547bf81ca8e9701dfab44e9cd7140ff84
+    dff8dfcc7969be6d03a524cf1e61e7bc8f45346e83d434601de859b0f6fd3230
+    334b69339f34454b3cdd39d6d1d4e57e2e59ddee99870d7c8d65be7c2c45359a
+    f0a2680c09570f9458abc5e4a6c3b7dac7971cdeaed08b7ec090d8a17bee4244
+))
