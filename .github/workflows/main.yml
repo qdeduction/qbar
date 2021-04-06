@@ -5,20 +5,26 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
+    branches: [ master ]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 
-    - name: Build
-      run: cargo build --verbose
+    - uses: actions/checkout@v2
+    - name: Install latest nightly
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: nightly
+          override: true
+          components: rustfmt, clippy
     - name: Run tests
-      run: cargo test --verbose
+      run: cargo test --verbose --all-features
     - name: Run clippy
-      run: cargo clippy --verbose
+      run: cargo clippy --verbose --all-features
     - name: Format
       run: cargo fmt --verbose -- --check
