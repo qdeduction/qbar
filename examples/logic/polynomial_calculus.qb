@@ -1,0 +1,405 @@
+# [WIP] Polynomial Calculus over a field
+
+## Setup
+
+[TODO: division?]
+
+Problem Definition:
+1. Define your monomials using `(_ : P1)`.
+2. Define your basis using `(_ : P)`.
+3. Try to prove `(1 : P)`.
+
+### Example
+
+In this case our monomials are `{X, Y}`, and our basis is `{XY-1, X}`.
+
+Problem Statement:
+((
+    (X : P1)
+    (Y : P1)
+    (X : P)
+    (((X * Y) + ((- 1) 1)) : P)
+)(
+    (1 : P)
+))
+
+Proof:
+[TODO: Remove Promise!]
+(
+    0f9d5d5a460b96f ()
+    22b9fa7303eb760 (c 1)
+    0103ff27a8d6ff7 (c (- 1) f ((X * Y) + ((- 1) 1)))
+    e7ca77fdc8f4e71 (c (- 1) f (X * Y) g ((- 1) 1))
+    b302fdeca3029af (f ((- 1) (X * Y)) g ((- 1) ((- 1) 1)))
+    de0c805222cf89d (a (- 1) b (- 1) f 1)
+    5cd26d75fa247fb (x Y f X)
+    e82009985821e5d (_ (X : P1))
+    e82009985821e5d (_ ((Y * X) : P))
+    e82009985821e5d (_ (((- 1) (X * Y)) : P))
+    ((
+        ((((- 1) * (- 1)) 1) : P)
+    )(
+        (1 : P)
+    )) ()
+)
+
+## Rules
+
+((: F P P1 = 0 1 - + *)(
+
+))
+
+### Non-Linearity
+
+e82009985821e5d993257300314005b65d7bedeb140cfc092e262b9ec3d16b05
+((
+    _
+)(
+
+))
+
+9a4eba8889246d5644a58166e6e703b82b12ad010cee8abf46e309435b591190
+((
+    _
+)(
+    _ _
+))
+
+### Equality
+
+8712539fd8ba0c1062bbd54ffc7cc75d2e932d586335155713932cf6579893b0
+((
+    (c : F)
+)(
+    (c = c : F)
+))
+
+b0a5a633a4c8033840abe715c20f8a4d5d92322891ab87f071d222a90a83f149
+((
+    (a = b : F)
+)(
+    (b = a : F)
+))
+
+8aa5bd8b8f051c9a302721bc2a1a3e8bd38ec42127c442af45675e7170d71bae
+((
+    (a = b : F)
+    (b = c : F)
+)(
+    (a = c : F)
+))
+
+64b4cf105f0b1f69aec6c811f91b3f5d17c7440b6c36456677e401e6f25cc0e8
+((
+    (a = b : F)
+)(
+    ((a + c) = (b + c) : F)
+))
+
+2e8e9b881bdf5843b234acd74b337b4b78a6741c1e695daa74e3ea85dde84a2a
+((
+    (a = b : F)
+)(
+    ((c + a) = (c + b) : F)
+))
+
+56205f6c165c115532d8599f297ad0cc0b5baf52360e613645581e16cafe503c
+((
+    (a = b : F)
+)(
+    ((a * c) = (b * c) : F)
+))
+
+452721e7949ccc4b3a41d1b5e2eab3981111ba0751622832e880c46351684b5d
+((
+    (a = b : F)
+)(
+    ((c * a) = (c * b) : F)
+))
+
+90913b1c18be87e72c56d8cb093b237b8cdcd70c7ae2dabe2061fbd06b1542aa
+((
+    (a = b : F)
+    ((a f) : P)
+)(
+    ((b f) : P)
+))
+
+### Zero Scalar
+
+d69b82e4d6d6c22e61a101f645edcb18064cb897a6de3e7f28c6215517d9a54f
+((
+
+)(
+    (0 : F)
+))
+
+### One Scalar
+
+0f9d5d5a460b96f018016ea3a32ffa44a110799286277aae20e11717c8fa6504
+((
+
+)(
+    (1 : F)
+))
+
+### Scalar Addition
+
+463ce9a8676434d8135de6f1ac876f54c04a5da59ccb8d541dfb868a47d059b2
+((
+    (a : F)
+    (b : F)
+)(
+    ((a + b) : F)
+))
+
+b8416b61942e866b79e3b0fd6c84163de677e5a04a85d786da858a1e39268973
+((
+    (c : F)
+)(
+    ((c + 0) = c : F)
+))
+
+cf93fe39c21d4657bd845ea33bb8edb518d7f7e099a3436fdebde7db6065d08e
+((
+    (c : F)
+)(
+    ((0 + c) = c : F)
+))
+
+2ccb7656cdd1a5a94da00ccce96ca3a627158ac863684d26791996cd7d385457
+((
+    (a : F)
+    (b : F)
+)(
+    ((a + b) = (b + a) : F)
+))
+
+013a5180830f91f8d1881eba5059be1aff940f190fe8604d3faf22d7f9e49410
+((
+    (a : F)
+    (b : F)
+    (c : F)
+)(
+    (((a + b) + c) = (a + (b + c)) : F)
+))
+
+### Additive Inverse
+
+22b9fa7303eb76092c22f4f2a885f291818d00b67d3432d0362e3f1b37c443df
+((
+    (c : F)
+)(
+    ((- c) : F)
+))
+
+0b0377f41e8e0dfbb5a838b86d30269abf664ff512c152598138587fb58ab2ca
+((
+    (c : F)
+)(
+    ((c + (- c)) = 0 : F)
+))
+
+### Multiplication
+
+da906356a8e43d3c592ff21ee024b0997d15a0d723867db1affb957eacec8899
+((
+    (a : F)
+    (b : F)
+)(
+    ((a * b) : F)
+))
+
+c6873b8627c5bb30dadb1924932e4fa859c5eb2a2dd5e0d315341d56d0d831d9
+((
+    (c : F)
+)(
+    ((c * 1) = c : F)
+))
+
+e17fc289012d7c56fedea2ca5c940a92f6adc9e46a7588a3a47b4e217849376d
+((
+    (c : F)
+)(
+    ((1 * c) = c : F)
+))
+
+39ed3c11c0f3c56bd4f703e1cca973ad575cc2ed1c2060bcd72fddf05f1b68f8
+((
+    (a : F)
+    (b : F)
+)(
+    ((a * b) = (b * a) : F)
+))
+
+c49722b47bf5615aff8fe35227f33a4472426b83b136a168e4088244ae7758fa
+((
+    (a : F)
+    (b : F)
+    (c : F)
+)(
+    (((a * b) * c) = (a * (b * c)) : F)
+))
+
+### Distributivity
+
+6398cedc9e7877200f75809498f929466f9c5ea11baf4e92f4d74bf2dd873b1d
+((
+    (a : F)
+    (b : F)
+    (c : F)
+)(
+    ((a * (b + c)) = ((a * b) + (a * c)) : F)
+))
+
+### Polynomials
+
+#### Scalar Multiplication
+
+0103ff27a8d6ff7f78dbc09a13d1c968acae94f94fb747e7c0c5002d036d05fd
+((
+    (c : F)
+    (f : P)
+)(
+    ((c f) : P)
+))
+
+0e774639f07973c53f78baee552fe2066b5b4042fa6f0d3443f762a68daab152
+((
+    ((c f) : P)
+)(
+    (f : P)
+    (c : F)
+))
+
+c490e0a0ce10876caf6ce051d5bed19ba6ca1af1d5d5b8697cc76b4044985966
+((
+    ((0 f) : P)
+)(
+
+))
+
+e2879adf52ff429b3b4f2c64ba78899db7c52fd8da56e2e03c9a0ee2acf8bb11
+((
+    ((1 f) : P)
+)(
+    (f : P)
+))
+
+301e297fa028fe8b45dbe2d314bec4e89725bdecc820b83d7ce8de94dbc9203e
+((
+    (f : P)
+)(
+    ((1 f) : P)
+))
+
+#### Addition
+
+d146e3c83759172c2a972e0a896e1b8ffd8144ae21ba18c48d378a4eff372c24
+((
+    (f : P)
+    (g : P)
+)(
+    ((f + g) : P)
+))
+
+b302fdeca3029af40f1f5100530e96e688fe1edb35b5426f2b90f81cbaddb5e9
+((
+    ((f + g) : P)
+)(
+    (g : P)
+    (f : P)
+))
+
+149b5f1bc8bc6ab778d4164e286247fc384c03f973b7afabfd4ce1269fc66874
+((
+    ((f + g) : P)
+)(
+    ((g + f) : P)
+))
+
+e35d6cd586dee16cc874c3bf6b98b1f8763d844ae3493b0402984c4bbfb03c9a
+((
+    (((f + g) + h) : P)
+)(
+    ((f + (g + h)) : P)
+))
+
+440cb31e81cd196efe9c0acf83fa38e26e95ef830218c121c8aedcc3e227db2e
+((
+    ((f + (g + h)) : P)
+)(
+    (((f + g) + h) : P)
+))
+
+#### Monomial Multiplication
+
+5cd26d75fa247fb3d51dbb9c37921c50f816c89fd1a44891cddeda9753709d28
+((
+    (x : P1)
+    (f : P)
+)(
+    ((x * f) : P)
+))
+
+#### Scalar Distributivity
+
+de0c805222cf89d4c49421c1b17fdcdb6ced8393699c3649be2d35b3a62e7261
+((
+    ((a (b f)) : P)
+)(
+    (((a * b) f) : P)
+))
+
+e7ca77fdc8f4e71059cb632f43d861f48903382b52551edc8a538a0ee224c021
+((
+    ((c (f + g)) : P)
+)(
+    (((c f) + (c g)) : P)
+))
+
+610cd103560082b1219c887a8e5455bdc31faa9b9c4c1f4d830c91fe5d50e4ca
+((
+    (((c f) + (c g)) : P)
+)(
+    ((c (f + g)) : P)
+))
+
+b86ea737577e279f2216a5aa025a6ca9729de38901693e15f24738b17f70a5fd
+((
+    (((a + b) f) : P)
+)(
+    (((a f) + (b f)) : P)
+))
+
+5bb5665023113184930bf041eef7f61de68ddf325b438e1239b2622dd805b2d1
+((
+    (((a f) + (b f)) : P)
+)(
+    (((a + b) f) : P)
+))
+
+#### Monomial Distributivity
+
+cd82bc463cf8611262b27e905e245c5c6531d96102e9732701312757a7e54524
+((
+    ((x * (f + g)) : P)
+)(
+    (((x * f) + (x * g)) : P)
+))
+
+349ade7c084452f9dc00e55e451c42cbb07b8f20442ae42262591fb364dfce05
+((
+    (((x * f) + (x * g)) : P)
+)(
+    ((x * (f + g)) : P)
+))
+
+#### Binary Cancellation
+
+5177e5e5adec799a896c773321451ae4d5ead7e9519fbc4c44731c6beb0f2c51
+((
+    (((x * x) + (- 1) x) : P)
+)(
+
+))
