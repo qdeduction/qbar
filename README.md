@@ -8,7 +8,10 @@
 [![Project Crate](https://flat.badgen.net/crates/v/qbar)](https://crates.io/crates/qbar)
 [![Documentation](https://flat.badgen.net/badge/docs/latest/blue)](https://docs.rs/qbar)
 
+<br/>
+
 ---
+
 <div align="center">
 
 [![Author](https://img.shields.io/badge/-AUTHOR-blue?style=for-the-badge)](https://github.com/bhgomes)
