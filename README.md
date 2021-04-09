@@ -1,5 +1,5 @@
 <a href="https://qbar.io">
-  <img align="left" height="140em" src="https://raw.githubusercontent.com/qdeduction/qbar/master/docs/image/logo-with-background-blue.svg">
+  <img align="left" height="170em" src="https://raw.githubusercontent.com/qdeduction/qbar/master/docs/image/logo-with-background-blue.svg">
 </a>
 
 # qbar
