@@ -1,3 +1,5 @@
+<div align="center">
+
 <a href="https://qbar.io">
   <img align="left" width="150em" src="https://raw.githubusercontent.com/qdeduction/qbar/master/docs/image/logo-with-background-blue.svg">
 </a>
@@ -9,6 +11,8 @@
 [![Workflow Status](https://flat.badgen.net/github/checks/qdeduction/qbar?label=workflow)](https://github.com/qdeduction/qbar/actions)
 [![Project Crate](https://flat.badgen.net/crates/v/qbar)](https://crates.io/crates/qbar)
 [![Documentation](https://flat.badgen.net/badge/docs/latest/blue)](https://docs.rs/qbar)
+
+</div>
 
 <br/>
 
