@@ -1,4 +1,4 @@
-<div style="margin: 0 auto;">
+<div style="margin: 0 auto; width: max-content;">
 
 <a href="https://qbar.io">
   <img align="left" width="150em" src="https://raw.githubusercontent.com/qdeduction/qbar/master/docs/image/logo-with-background-blue.svg">
