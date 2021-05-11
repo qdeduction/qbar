@@ -5,10 +5,11 @@ let client: LanguageClient
 
 function startClient (): void {
   const path: string = workspace.getConfiguration('qbar').get('executablePath') ?? 'qbar'
+  // TODO: add custom config file to `workspace.getConfiguration('qbar')`
   client = new LanguageClient('qbar', 'qbar language server',
     {
-      run: { command: path, args: ['server'] },
-      debug: { command: path, args: ['server', '--debug'] }
+      run: { command: path, args: ['lsp'] },
+      debug: { command: path, args: ['lsp', '--verbose'] }
     },
     {
       documentSelector: [{ scheme: 'file', language: 'qbar' }],
@@ -20,10 +21,8 @@ function startClient (): void {
 export function activate (context: ExtensionContext): void {
   startClient()
   context.subscriptions.push(
-    // TODO: workspace.onDidOpenTextDocument(),
-    // TODO: workspace.onWillSaveTextDocument(),
     commands.registerCommand('qbar.shutdownServer',
-      async () => await client.stop().then(() => {}, () => {})),
+      async () => await client.stop().then(() => { }, () => { })),
     commands.registerCommand('qbar.restartServer',
       async () => await client.stop().then(startClient, startClient))
   )

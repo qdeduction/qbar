@@ -2,21 +2,49 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "qbar",
 	"scopeName": "source.qbar",
-	"fileTypes": [".qb"],
+	"fileTypes": [
+		".qb"
+	],
 	"foldingStartMarker": "\\(\\s*$",
 	"foldingStopMarker": "^\\s*\\)",
-	"patterns": [{"include": "#atom"}, {"include": "#group"}],
+	"patterns": [
+		{
+			"include": "#documentation"
+		},
+		{
+			"include": "#group"
+		}
+	],
 	"repository": {
+		"documentation": {
+			"name": "comment.documentation.qbar",
+			"match": "(?>[^\\\"\\(\\s\\)]+(?>(?>\\\"[^\\\"]*\\\")[^\\\"\\(\\s\\)]*)*)|(?>[^\\\"\\(\\s\\)]*(?>(?>\\\"[^\\\"]*\\\")[^\\\"\\(\\s\\)]*)+)"
+		},
 		"atom": {
-			"name": "atom.qbar",
-			"match": "[^\\(\\s\\)]+(?>\\\".*\\\")?[^\\(\\s\\)]*"
+			"name": "expression.atom.qbar",
+			"match": "(?>[^\\\"\\(\\s\\)]+(?>(?>\\\"[^\\\"]*\\\")[^\\\"\\(\\s\\)]*)*)|(?>[^\\\"\\(\\s\\)]*(?>(?>\\\"[^\\\"]*\\\")[^\\\"\\(\\s\\)]*)+)"
 		},
 		"group": {
-			"name": "expression.group",
+			"name": "expression.group.qbar",
 			"begin": "\\(",
-			"beginCaptures": {"0": { "name": "punctuation.group.open.qbar" }},
-			"patterns": [{ "include": "#atom" }, {"include": "#group"}],
-			"endCaptures": {"0": { "name": "punctuation.group.close.qbar" }},
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.group.open.qbar"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#atom"
+				},
+				{
+					"include": "#group"
+				}
+			],
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.group.close.qbar"
+				}
+			},
 			"end": "\\)"
 		}
 	}
